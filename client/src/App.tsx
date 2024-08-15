@@ -1,19 +1,17 @@
-import LogInButton from './components/button/LogInButton'
-import Hamster from './components/hamster/Hamster'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import Home from "./components/pages/Home";
+import Dashboard from "./components/pages/Dashboard";
 import "./App.css";
-import Dashboard from './components/pages/Dashboard';
-
-const code = new URLSearchParams(window.location.search).get("code") as string;
 
 function App() {
-  if (code) {
-    return <Dashboard code={code} />;
-  }
   return (
     <>
-      <h1>Daily Song</h1>
-      <Hamster></Hamster>
-      <LogInButton></LogInButton>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home></Home>}></Route>
+          <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
+        </Routes>
+      </Router>
     </>
   )
 }

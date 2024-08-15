@@ -1,3 +1,4 @@
+import useAuth from "../../hooks/useAuth";
 import { generateRandomString } from "./GenerateRandomString";
 
 export default function Login() {
@@ -14,4 +15,7 @@ export default function Login() {
 
   const spotifyAuthURL = `https://accounts.spotify.com/authorize?${params.toString()}`;
   window.location.href = spotifyAuthURL;
+
+  const accessToken = useAuth();
+  if (accessToken) console.log("Login, access token: ", accessToken);
 }

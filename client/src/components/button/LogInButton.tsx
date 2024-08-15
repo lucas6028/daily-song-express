@@ -1,10 +1,8 @@
-// import NavigationButton from "./NavigationButton";
-
-import Login from "../auth/Login";
+import NavigationButton from "./NavigationButton";
 
 function LogInButton() {
   return (
-    <button className="cssbuttons-io-button" onClick={Login}>
+    <NavigationButton to="/dashboard" className="cssbuttons-io-button">
       Get started
       <div className="icon">
         <svg
@@ -20,7 +18,7 @@ function LogInButton() {
           ></path>
         </svg>
       </div>
-    </button>
+    </NavigationButton>
   );
 }
 

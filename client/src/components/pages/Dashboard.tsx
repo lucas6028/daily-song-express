@@ -1,12 +1,14 @@
-import useAuth from "../../hooks/useAuth";
-import { DashboardProps } from "../Types";
+// import useAuth from "../../hooks/useAuth";
+// import { DashboardProps } from "../Types";
 
-export default function Dashboard({ code }: DashboardProps) {
-    if (!code) return;
-    console.log("run useAuth not yet");
-    const accessToken = useAuth(code);
-    console.log("Finishing useAuth, return the {code}");
+export default function Dashboard() {
+    // const accessToken = useAuth();
+
     return (
-        <p>{code}</p>
+        <div>
+            <h1>Dashboard</h1>
+            {/* <p>Authorization Code: {code}</p> */}
+            {/* <p>Access Token: {accessToken ? accessToken : "Loading..."}</p> */}
+        </div>
     );
 }

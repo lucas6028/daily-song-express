@@ -1,23 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useAuth(code: string) {
+export default function useAuth() {
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
   useEffect(() => {
-    if (!code) {
-      console.log("Authorization code is missing");
+    // Capture the code from the URL
+    const urlCode = new URLSearchParams(window.location.search).get("code");
+
+    if (!urlCode) {
+      console.error("Authorization code is missing from URL");
       return;
     }
 
+    // Post the authorization code to the server
     axios
-      .post("http://localhost:3000/login", { code })
+      .post("http://localhost:3000/login", { code: urlCode })
       .then((res) => {
         console.log("Received response:", res.data);
-        // Handle the tokens received here, e.g., store in state or context
+        setAccessToken(res.data.accessToken);
+        // Optionally, you can store the access token in local storage or state
+        window.history.pushState({}, "", "/callback");
       })
       .catch((err) => {
         console.error("Error posting code:", err);
         // Optionally redirect or show an error message
-        // window.location.href = "/";
       });
-  }, [code]);
+  }, []);
+
+  return accessToken;
 }
