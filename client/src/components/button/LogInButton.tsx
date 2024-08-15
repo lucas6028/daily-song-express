@@ -1,8 +1,10 @@
 // import NavigationButton from "./NavigationButton";
 
+import Login from "../auth/Login";
+
 function LogInButton() {
   return (
-    <button className="cssbuttons-io-button">
+    <button className="cssbuttons-io-button" onClick={Login}>
       Get started
       <div className="icon">
         <svg
