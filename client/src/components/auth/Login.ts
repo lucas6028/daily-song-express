@@ -2,7 +2,7 @@ import { generateRandomString } from "./GenerateRandomString";
 
 export default function Login() {
   const clientId = "efecfa4580fd46c4aa1a04799c986e1d";
-  const redirectURI = "http://localhost:5173";
+  const redirectURI = "http://localhost:5173/callback";
   const state = generateRandomString(128);
 
   const params = new URLSearchParams();
