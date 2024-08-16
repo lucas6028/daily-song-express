@@ -1,8 +1,8 @@
 import { generateRandomString } from "./GenerateRandomString";
 
 export default function RedirectURL() {
-  const clientId = "efecfa4580fd46c4aa1a04799c986e1d";
-  const redirectURI = "http://localhost:5173/dashboard";
+  const clientId = import.meta.env.VITE_CLIENT_ID;
+  const redirectURI = import.meta.env.VITE_REDIRECT_URI;
   const state = generateRandomString(128);
 
   const params = new URLSearchParams();
