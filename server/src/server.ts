@@ -1,14 +1,15 @@
 import express from "express";
 import SpotifyWebAPI from "spotify-web-api-node";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001;
-const redirectURI =
-  process.env.REDIRECT_URI || "http://localhost:5173/callback";
-const client_id = process.env.CLIENT_ID || "efecfa4580fd46c4aa1a04799c986e1d";
-const client_secret =
-  process.env.CLIENT_SECRET || "4324744363454d89911c11b05d5dff4d";
+const port = process.env.API_PORT || 3000;
+const redirectURI = process.env.API_REDIRECT_URI;
+const client_id = process.env.API_CLIENT_ID;
+const client_secret = process.env.API_CLIENT_SECRET;
 
 app.use(express.json()); // Middleware to parse JSON
 app.use(cors());
@@ -38,6 +39,8 @@ app.post("/login", (req, res) => {
       // Set the access token on the API object to use it in later calls
       spotifyAPI.setAccessToken(data.body["access_token"]);
       spotifyAPI.setRefreshToken(data.body["refresh_token"]);
+
+      res.send(data.body["access_token"]);
     },
     (err) => {
       console.error("Error during authorization code grant", err);
