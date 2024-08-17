@@ -5,6 +5,7 @@ import Profile from "../api/Profile";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
+    const [hasToken, setHasToken] = useState(false);
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
@@ -20,10 +21,19 @@ export default function Dashboard() {
     useEffect(() => {
         if (urlCode) {
             console.log("Get the access token");
-            RequestAccess(urlCode);
+            RequestAccess(urlCode)
+                .then((res: boolean) => {
+                    setHasToken(res);
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
         }
     }, [urlCode])
 
+    if (!hasToken) {
+        return (<p>Loading...</p>);
+    }
     return (
         <>
             <h1>Dashboard</h1>
