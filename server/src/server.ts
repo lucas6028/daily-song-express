@@ -10,10 +10,16 @@ const port = process.env.API_PORT || 3000;
 const redirectURI = process.env.API_REDIRECT_URI;
 const client_id = process.env.API_CLIENT_ID;
 const client_secret = process.env.API_CLIENT_SECRET;
+const spotifyAPI = new SpotifyWebAPI({
+  redirectUri: redirectURI,
+  clientId: client_id,
+  clientSecret: client_secret,
+});
 
 app.use(express.json()); // Middleware to parse JSON
 app.use(cors());
 
+// use authorized code in exchange for accesstoken, refresh token
 app.post("/login", (req, res) => {
   const { code } = req.body;
 
@@ -23,12 +29,6 @@ app.post("/login", (req, res) => {
   }
 
   console.log("Received authorization code:", code);
-
-  const spotifyAPI = new SpotifyWebAPI({
-    redirectUri: redirectURI,
-    clientId: client_id,
-    clientSecret: client_secret,
-  });
 
   spotifyAPI.authorizationCodeGrant(code).then(
     (data) => {
