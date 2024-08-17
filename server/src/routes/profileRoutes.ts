@@ -8,7 +8,6 @@ router.get("/", (req, res) => {
   spotifyAPI
     .getMe()
     .then((data) => {
-      console.log("Some information about the authenticated user", data.body);
       res.json(data);
     })
     .catch((err) => {

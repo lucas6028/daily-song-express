@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
+import Profile from "../api/Profile";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -24,8 +25,9 @@ export default function Dashboard() {
     }, [urlCode])
 
     return (
-        <div>
+        <>
             <h1>Dashboard</h1>
-        </div>
+            <Profile></Profile>
+        </>
     );
 }
