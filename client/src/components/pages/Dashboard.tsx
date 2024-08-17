@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
-import RefreshToken from "../auth/RefreshToken";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
-    const [expiresIn, setExpiresIn] = useState<number | null>(null);
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
@@ -21,21 +19,13 @@ export default function Dashboard() {
     useEffect(() => {
         if (urlCode) {
             console.log("Get the access token");
-            const newExpiresIn = RequestAccess(urlCode);
-            if (newExpiresIn) {
-                setExpiresIn(newExpiresIn);
-            }
-            const timeout = setInterval(() => {
-                RefreshToken();
-            }, (2 * 1000));
-            return () => clearTimeout(timeout);
+            RequestAccess(urlCode);
         }
     }, [urlCode])
 
     return (
         <div>
             <h1>Dashboard</h1>
-            {expiresIn && <p>Token expires in: {expiresIn} seconds</p>}
         </div>
     );
 }
