@@ -9,7 +9,7 @@ export default function RequestAccess(urlCode: string) {
 
   // Post the authorization code to the server
   axios
-    .post("http://localhost:3000/login", { code: urlCode })
+    .post(import.meta.env.VITE_SERVER_URL, { code: urlCode })
     .then((res) => {
       const expiresIn = res.data;
       console.log("Expired in:", expiresIn);

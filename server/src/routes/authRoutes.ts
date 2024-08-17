@@ -11,13 +11,14 @@ router.post("/", (req, res) => {
     return res.status(400).json({ error: "Code is required" });
   }
 
-  console.log("Received authorization code:", code);
+  console.log("Received authorization code.");
 
   spotifyAPI.authorizationCodeGrant(code).then(
     (data) => {
-      console.log("The token expires in " + data.body["expires_in"]);
-      console.log("The access token is " + data.body["access_token"]);
-      console.log("The refresh token is " + data.body["refresh_token"]);
+      // console.log("The token expires in " + data.body["expires_in"]);
+      // console.log("The access token is " + data.body["access_token"]);
+      // console.log("The refresh token is " + data.body["refresh_token"]);
+      console.log("Received access token, refresh token, expires in.");
 
       // Set the access token on the API object to use it in later calls
       spotifyAPI.setAccessToken(data.body["access_token"]);
