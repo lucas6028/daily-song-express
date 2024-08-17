@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function RequestAccess(urlCode: string | null) {
+export default function RequestAccess(urlCode: string) {
   if (!urlCode) {
     console.error("Authorization code is missing from URL");
     return;
@@ -10,13 +10,14 @@ export default function RequestAccess(urlCode: string | null) {
   axios
     .post("http://localhost:3000/login", { code: urlCode })
     .then((res) => {
-      console.log("Received response:", res.data);
+      const expiresIn = res.data;
+      console.log("Expired in:", expiresIn);
       window.history.pushState({}, "", "/dashboard");
-      console.log(res);
+      return expiresIn;
     })
     .catch((err) => {
       console.error("Error posting code:", err);
-      // Optionally redirect or show an error message
+      window.location.href = "/";
     });
 
   return null;

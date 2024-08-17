@@ -40,13 +40,30 @@ app.post("/login", (req, res) => {
       spotifyAPI.setAccessToken(data.body["access_token"]);
       spotifyAPI.setRefreshToken(data.body["refresh_token"]);
 
-      res.send(data.body["access_token"]);
+      res.json(data.body.expires_in);
     },
     (err) => {
       console.error("Error during authorization code grant", err);
       res.status(400).json({ error: "Failed to retrieve tokens" });
     }
   );
+});
+
+// refresh token
+app.post("/refresh", (req, res) => {
+  spotifyAPI
+    .refreshAccessToken()
+    .then((data) => {
+      console.log("The access token has been refreshed!");
+
+      // Save the access token so that it's used in future calls
+      spotifyAPI.setAccessToken(data.body["access_token"]);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Could not refresh access token", err);
+      res.sendStatus(400);
+    });
 });
 
 // Start the server
