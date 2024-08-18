@@ -3,6 +3,7 @@ import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
 import Profile from "../api/Profile";
 import Loading from "../loading/Loading";
+import NavigationButton from "../button/NavigationButton";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -41,6 +42,7 @@ export default function Dashboard() {
         <>
             <h1>Dashboard</h1>
             <Profile></Profile>
+            <NavigationButton to="/topTrack">Top Track</NavigationButton>
         </>
     );
 }
