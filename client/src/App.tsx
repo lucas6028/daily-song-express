@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./components/pages/Home";
 import Dashboard from "./components/pages/Dashboard";
 import "./App.css";
-import Helloworld from "./components/pages/Helloworld.test";
+import Helloworld from "./components/pages/Helloworld";
 import TopTrack from "./components/pages/TopTrack";
 
 function App() {
