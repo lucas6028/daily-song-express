@@ -42,7 +42,7 @@ export default function Dashboard() {
         <>
             <h1>Dashboard</h1>
             <Profile></Profile>
-            <NavigationButton to="/topTrack">Top Track</NavigationButton>
+            <NavigationButton to="/topTracks">Top Track</NavigationButton>
         </>
     );
 }
