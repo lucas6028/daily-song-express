@@ -22,7 +22,6 @@ export default function Dashboard() {
 
     useEffect(() => {
         if (urlCode) {
-            console.log("Get the access token");
             RequestAccess(urlCode)
                 .then((res: boolean) => {
                     setHasToken(res);
