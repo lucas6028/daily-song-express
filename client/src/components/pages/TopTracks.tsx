@@ -41,19 +41,19 @@ function TopTrack() {
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>Top Tracks</h1>
-            <ul>
+            <div>
                 {searchResults.map((track) => (
-                    <li key={track.id}>
+                    <div key={track.id}>
                         <img src={track.img} alt={track.title} />
                         <div>
                             <p>{track.title}</p>
                             <p>{track.artist}</p>
                         </div>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
