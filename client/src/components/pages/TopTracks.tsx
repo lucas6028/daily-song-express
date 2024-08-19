@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
-import { SpotifyApiResponse, Track } from "../Types";
+import { SpotifyItemsResponse, Track } from "../Types";
 
 
 function TopTrack() {
@@ -12,7 +12,7 @@ function TopTrack() {
     useEffect(() => {
         const fetchTopTracks = async () => {
             try {
-                const res = await axios.get<SpotifyApiResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`);
+                const res = await axios.get<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`);
                 const tracks = res.data.body.items.map((track) => ({
                     artist: track.artists[0].name,
                     title: track.name,

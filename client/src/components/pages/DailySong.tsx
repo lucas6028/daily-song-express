@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SpotifyApiResponse, Track } from "../Types"
+import { SpotifyTracksResponse, Track } from "../Types"
 import axios from 'axios';
 import Loading from '../loading/Loading';
 
@@ -11,7 +11,7 @@ function DailySong() {
     useEffect(() => {
         const fetchRecommendTracks = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/track/recommend`);
+                const res = await axios.get<SpotifyTracksResponse>(`${import.meta.env.VITE_SERVER_URL}/track/recommend`);
                 console.log(res);
                 const tracks = res.data.body.tracks.map((track) => ({
                     artist: track.artists[0].name,
@@ -42,6 +42,17 @@ function DailySong() {
     return (
         <>
             <h1>Daily Song</h1>
+            <ul>
+                {searchResults.map((track) => (
+                    <li key={track.id}>
+                        <img src={track.img} alt={track.title}></img>
+                        <div>
+                            <p>{track.title}</p>
+                            <p>{track.artist}</p>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </>
     )
 }

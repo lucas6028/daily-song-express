@@ -32,9 +32,15 @@ interface TrackItem {
 }
 
 // Define the structure of the API response data
-export interface SpotifyApiResponse {
+export interface SpotifyItemsResponse {
   body: {
     items: TrackItem[];
+  };
+}
+
+export interface SpotifyTracksResponse {
+  body: {
+    tracks: TrackItem[];
   };
 }
 
