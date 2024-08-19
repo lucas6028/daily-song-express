@@ -6,7 +6,7 @@ export default function Profile() {
     const [imgUrl, setImgUrl] = useState("");
 
     axios
-        .get(import.meta.env.VITE_SERVER_URL + "/profile")
+        .get(`${import.meta.env.VITE_SERVER_URL}/profile`)
         .then((data) => {
             console.log(data);
             setUserName(data.data.body["display_name"]);
