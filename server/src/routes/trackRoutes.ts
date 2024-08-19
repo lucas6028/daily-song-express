@@ -17,4 +17,16 @@ router.get("/myTop", (req, res) => {
     });
 });
 
+router.get("/recommend", (req, res) => {
+  spotifyAPI
+    .getRecommendations({ seed_artists: `01u3qI3xMGFvktXyRSMGRZ` })
+    .then((data) => {
+      console.log(data);
+      res.json(data);
+    })
+    .catch((err) => {
+      console.log("Error while get recommend track", err);
+    });
+});
+
 export default router;
