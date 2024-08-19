@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import "./App.css";
 import Home from "./components/pages/Home";
 import Dashboard from "./components/pages/Dashboard";
-import "./App.css";
 import Helloworld from "./components/pages/Helloworld";
 import TopTracks from "./components/pages/TopTracks";
+import Challenges from "./components/pages/Challenges";
+import DailySong from "./components/pages/DailySong";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
           <Route path="/helloworld" element={<Helloworld></Helloworld>}></Route>
           <Route path="/topTracks" element={<TopTracks></TopTracks>}></Route>
+          <Route path="/challenges" element={<Challenges></Challenges>}></Route>
+          <Route path="/daily" element={<DailySong></DailySong>}></Route>
         </Routes>
       </Router>
     </>

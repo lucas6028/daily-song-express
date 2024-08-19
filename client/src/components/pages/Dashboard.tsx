@@ -43,6 +43,8 @@ export default function Dashboard() {
             <h1>Dashboard</h1>
             <Profile></Profile>
             <NavigationButton to="/topTracks">Top Track</NavigationButton>
+            <NavigationButton to="/daily">Daily Song</NavigationButton>
+            <NavigationButton to="/challenges">Challenges</NavigationButton>
         </>
     );
 }
