@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
