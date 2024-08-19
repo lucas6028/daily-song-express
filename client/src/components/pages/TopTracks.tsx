@@ -1,46 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
+import { SpotifyApiResponse, Track } from "../Types";
 
-// Define the structure of the track's artist
-interface Artist {
-    name: string;
-}
-
-// Define the structure of the album's image
-interface AlbumImage {
-    url: string;
-}
-
-// Define the structure of the album
-interface Album {
-    images: AlbumImage[];
-}
-
-// Define the structure of the track item
-interface TrackItem {
-    artists: Artist[];
-    name: string;
-    id: string;
-    uri: string;
-    album: Album;
-}
-
-// Define the structure of the API response data
-interface SpotifyApiResponse {
-    body: {
-        items: TrackItem[];
-    };
-}
-
-// Define the Track type that you'll use in the component state
-interface Track {
-    artist: string;
-    title: string;
-    id: string;
-    uri: string;
-    img: string;
-}
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
