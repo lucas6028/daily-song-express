@@ -1,0 +1,21 @@
+{
+  "name": "daily-song",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "start-server": "cd server && npm run dev",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run dev",
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "install": "npm run install-server && npm run install-client",
+    "build": "npm run build-client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
