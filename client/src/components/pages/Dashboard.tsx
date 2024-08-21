@@ -33,6 +33,10 @@ export default function Dashboard() {
     }, [urlCode])
 
     if (!hasToken) {
+        const timeout = setTimeout(() => {
+            location.reload();
+        }, 5000);
+        clearTimeout(timeout);
         return (
             <Loading></Loading>
         );
