@@ -11,6 +11,11 @@ export default function Dashboard() {
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
+        if (sessionStorage.getItem("hasToken") === "yes") {
+            setHasToken(true);
+            window.history.pushState({}, "", "/dashboard");
+            return;
+        }
         if (!existingCode) {
             // Only redirect if there is no code in the URL
             RedirectURL();
@@ -25,6 +30,7 @@ export default function Dashboard() {
             RequestAccess(urlCode)
                 .then((res: boolean) => {
                     setHasToken(res);
+                    sessionStorage.setItem("hasToken", "yes");
                 })
                 .catch((err) => {
                     console.error(err);
