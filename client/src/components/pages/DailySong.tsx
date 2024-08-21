@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SpotifyTracksResponse, Track } from "../Types"
+import { SpotifyTracksResponse, Track } from "../types"
 import axios from 'axios';
 import Loading from '../loading/Loading';
 

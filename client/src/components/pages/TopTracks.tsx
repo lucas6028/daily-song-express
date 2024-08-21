@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
-import { SpotifyItemsResponse, Track } from "../Types";
+import { SpotifyItemsResponse, Track } from "../types";
 
 
 function TopTrack() {
