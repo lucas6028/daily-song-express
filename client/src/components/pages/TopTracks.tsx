@@ -12,7 +12,7 @@ function TopTrack() {
     useEffect(() => {
         const fetchTopTracks = async () => {
             try {
-                const res = await axios.get<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`);
+                const res = await axios.get<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/recommend`);
                 const tracks = res.data.body.items.map((track) => ({
                     artist: track.artists[0].name,
                     title: track.name,

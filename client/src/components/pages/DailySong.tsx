@@ -7,11 +7,20 @@ function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    // const seedArtists = "01u3qI3xMGFvktXyRSMGRZ";
+    const seedGenres = "k-pop";
+    const minPopularity = 10;
 
     useEffect(() => {
         const fetchRecommendTracks = async () => {
             try {
-                const res = await axios.get<SpotifyTracksResponse>(`${import.meta.env.VITE_SERVER_URL}/track/recommend`);
+                const res = await axios.get<SpotifyTracksResponse>(`${import.meta.env.VITE_SERVER_URL}/track/recommend`, {
+                    params: {
+                        // seed_artists: seedArtists,
+                        seed_genres: seedGenres,
+                        min_popularity: minPopularity,
+                    }
+                });
                 console.log(res);
                 const tracks = res.data.body.tracks.map((track) => ({
                     artist: track.artists[0].name,
