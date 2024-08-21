@@ -9,7 +9,10 @@ export default function RedirectURL() {
   params.append("client_id", clientId);
   params.append("response_type", "code");
   params.append("redirect_uri", redirectURI);
-  params.append("scope", "user-top-read");
+  params.append(
+    "scope",
+    "streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state user-library-read user-library-modify user-top-read"
+  );
   params.append("state", state);
 
   const spotifyAuthURL = `https://accounts.spotify.com/authorize?${params.toString()}`;
