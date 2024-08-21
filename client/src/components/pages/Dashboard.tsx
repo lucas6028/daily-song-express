@@ -40,7 +40,8 @@ export default function Dashboard() {
 
     if (!hasToken) {
         const timeout = setTimeout(() => {
-            location.reload();
+            // location.reload();
+            window.location.href = "/dashboard";
         }, 5000);
         clearTimeout(timeout);
         return (
