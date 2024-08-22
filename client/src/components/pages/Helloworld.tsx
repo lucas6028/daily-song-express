@@ -4,6 +4,7 @@ import { GetToken } from '../auth/GetToken';
 
 function Helloworld() {
     const [token, setToken] = useState<string>("");
+    const color = "#fff";
 
     useEffect(() => {
         const fetchToken = async () => {
@@ -21,7 +22,7 @@ function Helloworld() {
     return (
         <>
             <h1>Hello World</h1>
-            <SpotifyPlayer token={token} uris={['spotify:track:58Q3FZFs1YXPpliWQB5kXB']} />
+            <SpotifyPlayer styles={{ trackNameColor: color }} token={token} uris={['spotify:track:58Q3FZFs1YXPpliWQB5kXB']} />
         </>
     )
 }

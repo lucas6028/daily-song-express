@@ -12,10 +12,15 @@ function TopTrack() {
     const [error, setError] = useState<string | null>(null);
     const [token, setToken] = useState<string>("");
     const [uri, setUri] = useState<string>("");
+    const [play, setPlay] = useState<boolean>(false);
 
     const changeUri = (newUri: string) => {
         setUri(newUri);
     }
+
+    useEffect(() => {
+        setPlay(true);
+    }, [uri]);
 
     useEffect(() => {
         const fetchTopTracks = async () => {
@@ -64,7 +69,15 @@ function TopTrack() {
     return (
         <div className="container">
             <h1>Top Tracks</h1>
-            <SpotifyWebPlayer token={token} uris={[uri]} /><br></br>
+            <SpotifyWebPlayer showSaveIcon callback={(state) => {
+                if (!state.isPlaying) {
+                    setPlay(false);
+                }
+            }}
+                play={play}
+                token={token}
+                uris={[uri]} />
+            <br></br>
             <div>
                 {searchResults.map((track) => (
                     <div key={track.id} onClick={() => changeUri(track.trackUri)}>
