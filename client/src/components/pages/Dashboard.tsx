@@ -21,7 +21,7 @@ export default function Dashboard() {
             RedirectURL();
         } else {
             setUrlCode(existingCode);
-            console.log("Authorization Code:", existingCode);
+            // console.log("Authorization Code:", existingCode);
         }
     }, []);
 
@@ -41,7 +41,7 @@ export default function Dashboard() {
     if (!hasToken) {
         const timeout = setTimeout(() => {
             // location.reload();
-            window.location.href = "/dashboard";
+            // window.location.href = "/dashboard";
         }, 5000);
         clearTimeout(timeout);
         return (

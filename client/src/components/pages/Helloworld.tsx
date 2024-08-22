@@ -9,7 +9,6 @@ function Helloworld() {
         const fetchToken = async () => {
             try {
                 const { data } = await axios.get<string>(`${import.meta.env.VITE_SERVER_URL}/login/token`);
-                console.log("access token: ", data);
                 setToken(data);
             } catch (err) {
                 console.error("Error while getting access token: " + err);

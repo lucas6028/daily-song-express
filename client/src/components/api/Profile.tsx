@@ -8,7 +8,7 @@ export default function Profile() {
     axios
         .get(`${import.meta.env.VITE_SERVER_URL}/profile`)
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             setUserName(data.data.body["display_name"]);
             setImgUrl(data.data.body.images[0].url);
         })
