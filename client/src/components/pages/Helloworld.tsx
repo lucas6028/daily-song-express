@@ -21,7 +21,7 @@ function Helloworld() {
     return (
         <>
             <h1>Hello World</h1>
-            <SpotifyPlayer token={token} uris={['spotify:artist:6HvZYsbFfjnjFrWF950C9d']} />
+            <SpotifyPlayer token={token} uris={['spotify:track:58Q3FZFs1YXPpliWQB5kXB']} />
         </>
     )
 }

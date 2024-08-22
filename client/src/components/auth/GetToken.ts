@@ -9,6 +9,6 @@ export const GetToken = async (): Promise<string> => {
     return data;
   } catch (err) {
     console.error("Error while getting access token: ", err);
-    throw err; // rethrow the error to handle it in the calling function
+    throw err;
   }
 };

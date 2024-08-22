@@ -10,6 +10,7 @@ export interface RequestAccessProps {
 // Define the structure of the track's artist
 interface Artist {
   name: string;
+  uri: string;
 }
 
 // Define the structure of the album's image
@@ -20,6 +21,8 @@ interface AlbumImage {
 // Define the structure of the album
 interface Album {
   images: AlbumImage[];
+  uri: string;
+  name: string;
 }
 
 // Define the structure of the track item
@@ -46,9 +49,12 @@ export interface SpotifyTracksResponse {
 
 // Define the Track type that you'll use in the component state
 export interface Track {
+  albumName: string;
+  albumUri: string;
   artist: string;
+  artistUri: string;
   title: string;
   id: string;
-  uri: string;
+  trackUri: string;
   img: string;
 }

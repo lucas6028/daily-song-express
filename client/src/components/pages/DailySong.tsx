@@ -23,10 +23,13 @@ function DailySong() {
                 });
                 console.log(res);
                 const tracks = res.data.body.tracks.map((track) => ({
+                    albumName: track.album.name,
+                    albumUri: track.album.uri,
                     artist: track.artists[0].name,
+                    artistUri: track.artists[0].uri,
                     title: track.name,
                     id: track.id,
-                    uri: track.uri,
+                    trackUri: track.uri,
                     img: track.album.images[1].url,
                 }));
 
