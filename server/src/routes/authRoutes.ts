@@ -2,40 +2,43 @@ import { Router } from "express";
 import spotifyAPI from "../config/spotifyConfig";
 
 const router = Router();
-let token = "";
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const { code } = req.body;
 
   if (!code) {
     console.error("Authorization code is missing from request");
-    return res.status(400).json({ error: "Code is required" });
+    return res.status(400).json({ error: "Authorization code is required" });
   }
 
   console.log("Received authorization code.");
 
-  spotifyAPI.authorizationCodeGrant(code).then(
-    (data) => {
-      // console.log("The token expires in " + data.body["expires_in"]);
-      // console.log("The refresh token is " + data.body["refresh_token"]);
-      console.log("The access token is " + data.body["access_token"]);
-      console.log("Received access token, refresh token, expires in.");
-      token = data.body["access_token"];
+  try {
+    const data = await spotifyAPI.authorizationCodeGrant(code);
 
-      spotifyAPI.setAccessToken(data.body["access_token"]);
-      spotifyAPI.setRefreshToken(data.body["refresh_token"]);
+    console.log("Received access token, refresh token, expires in.");
+    const accessToken = data.body["access_token"];
+    const refreshToken = data.body["refresh_token"];
+    const expiresIn = data.body["expires_in"];
 
-      res.json(data.body.expires_in);
-    },
-    (err) => {
-      console.error("Error during authorization code grant", err);
-      res.status(400).json({ error: "Failed to retrieve tokens" });
-    }
-  );
+    spotifyAPI.setAccessToken(accessToken);
+    spotifyAPI.setRefreshToken(refreshToken);
+
+    res.json({ accessToken, refreshToken, expiresIn });
+  } catch (err) {
+    console.error("Error during authorization code grant", err);
+    res.status(400).json({ error: "Failed to retrieve tokens" });
+  }
 });
 
 router.get("/token", (req, res) => {
-  res.send(token);
+  // Example: retrieve token from a secure source instead of a global variable
+  const token = spotifyAPI.getAccessToken();
+  if (token) {
+    res.send(token);
+  } else {
+    res.status(401).json({ error: "Token not available" });
+  }
 });
 
 export default router;
