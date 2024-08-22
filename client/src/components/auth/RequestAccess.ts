@@ -12,7 +12,7 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
   return axios
     .post(`${import.meta.env.VITE_SERVER_URL}/login`, { code: urlCode })
     .then((res) => {
-      const expiresIn = res.data;
+      const expiresIn = res.data["expiresIn"];
       console.log("Expired in:", expiresIn);
 
       // add interval to refresh token
