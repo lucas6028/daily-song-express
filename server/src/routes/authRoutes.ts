@@ -2,6 +2,7 @@ import { Router } from "express";
 import spotifyAPI from "../config/spotifyConfig";
 
 const router = Router();
+let token = "";
 
 router.post("/", (req, res) => {
   const { code } = req.body;
@@ -16,11 +17,11 @@ router.post("/", (req, res) => {
   spotifyAPI.authorizationCodeGrant(code).then(
     (data) => {
       // console.log("The token expires in " + data.body["expires_in"]);
-      // console.log("The access token is " + data.body["access_token"]);
       // console.log("The refresh token is " + data.body["refresh_token"]);
+      console.log("The access token is " + data.body["access_token"]);
       console.log("Received access token, refresh token, expires in.");
+      token = data.body["access_token"];
 
-      // Set the access token on the API object to use it in later calls
       spotifyAPI.setAccessToken(data.body["access_token"]);
       spotifyAPI.setRefreshToken(data.body["refresh_token"]);
 
@@ -31,6 +32,10 @@ router.post("/", (req, res) => {
       res.status(400).json({ error: "Failed to retrieve tokens" });
     }
   );
+});
+
+router.get("/token", (req, res) => {
+  res.send(token);
 });
 
 export default router;
