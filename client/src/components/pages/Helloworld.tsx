@@ -1,30 +1,19 @@
-import { useState, useEffect } from 'react';
-import SpotifyPlayer from 'react-spotify-web-playback';
-import { GetToken } from '../auth/GetToken';
+import React from 'react';
+import SwipeableSlider from '../../ui/SwipeableSlider';
 
-function Helloworld() {
-    const [token, setToken] = useState<string>("");
-    const color = "#fff";
-
-    useEffect(() => {
-        const fetchToken = async () => {
-            try {
-                const token = await GetToken();
-                setToken(token);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchToken();
-    }, []);
+const HellWorld: React.FC = () => {
+    const items = [
+        { id: 1, title: 'Item 1', description: 'This is the first item', imageUrl: 'https://placehold.co/400' },
+        { id: 2, title: 'Item 2', description: 'This is the second item', imageUrl: 'https://placehold.co/400' },
+        { id: 3, title: 'Item 3', description: 'This is the third item', imageUrl: 'https://placehold.co/400' },
+        // Add more items as needed
+    ];
 
     return (
-        <>
-            <h1>Hello World</h1>
-            <SpotifyPlayer styles={{ trackNameColor: color }} token={token} uris={['spotify:track:58Q3FZFs1YXPpliWQB5kXB']} />
-        </>
-    )
-}
+        <div>
+            <SwipeableSlider items={items} />
+        </div>
+    );
+};
 
-export default Helloworld;
+export default HellWorld;
