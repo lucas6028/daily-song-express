@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import SpotifyPlayer from 'react-spotify-web-playback';
+import { GetToken } from '../auth/GetToken';
 
 function Helloworld() {
     const [token, setToken] = useState<string>("");
@@ -8,15 +8,15 @@ function Helloworld() {
     useEffect(() => {
         const fetchToken = async () => {
             try {
-                const { data } = await axios.get<string>(`${import.meta.env.VITE_SERVER_URL}/login/token`);
-                setToken(data);
+                const token = await GetToken();
+                setToken(token);
             } catch (err) {
-                console.error("Error while getting access token: " + err);
+                console.error(err);
             }
         };
 
         fetchToken();
-    }, []); // Empty dependency array means this effect runs only once when the component mounts
+    }, []);
 
     return (
         <>
