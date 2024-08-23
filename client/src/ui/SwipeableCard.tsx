@@ -8,20 +8,35 @@ interface SwipeableCardProps {
         description: string;
         imageUrl: string;
     };
-    onSwipeLeft: (item: { id: number; title: string; description: string; imageUrl: string }) => void;
-    onSwipeRight: (item: { id: number; title: string; description: string; imageUrl: string }) => void;
+    onSwipeLeft?: () => void;
+    onSwipeRight?: () => void;
     isActive: boolean;
+    isSwiping: boolean;
+    swipeDirection: 'left' | 'right';
 }
 
-const SwipeableCard: React.FC<SwipeableCardProps> = ({ item, onSwipeLeft, onSwipeRight, isActive }) => {
+const SwipeableCard: React.FC<SwipeableCardProps> = ({
+    item,
+    onSwipeLeft,
+    onSwipeRight,
+    isActive,
+    isSwiping,
+    swipeDirection
+}) => {
     const handlers = useSwipeable({
-        onSwipedLeft: () => onSwipeLeft(item),
-        onSwipedRight: () => onSwipeRight(item),
+        onSwipedLeft: onSwipeLeft,
+        onSwipedRight: onSwipeRight,
         trackMouse: true,
     });
 
     return (
-        <div {...handlers} style={{ ...cardStyle, ...getCardTransitionStyle(isActive) }}>
+        <div
+            {...handlers}
+            style={{
+                ...cardStyle,
+                ...getCardTransitionStyle(isActive, isSwiping, swipeDirection)
+            }}
+        >
             <img src={item.imageUrl} alt={item.title} style={imageStyle} />
             <h2 style={nonSelectableTextStyle}>{item.title}</h2>
             <p style={nonSelectableTextStyle}>{item.description}</p>
@@ -29,11 +44,25 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ item, onSwipeLeft, onSwip
     );
 };
 
-const getCardTransitionStyle = (isActive: boolean): React.CSSProperties => ({
-    opacity: isActive ? 1 : 0,
-    transform: isActive ? 'translateX(0)' : 'translateX(100%)',
-    transition: 'opacity 0.5s ease, transform 0.5s ease',
-});
+const getCardTransitionStyle = (
+    isActive: boolean,
+    isSwiping: boolean,
+    direction: 'left' | 'right'
+): React.CSSProperties => {
+    if (isSwiping && isActive) {
+        return {
+            transform: direction === 'left' ? 'translateX(-100%)' : 'translateX(100%)',
+            transition: 'transform 0.6s ease',
+            zIndex: 1, // Ensure this card is on top
+        };
+    }
+
+    return {
+        transform: 'translateX(0)',
+        transition: isActive ? 'none' : 'transform 0.6s ease',
+        zIndex: isActive ? 1 : 0,
+    };
+};
 
 const cardStyle: React.CSSProperties = {
     width: '300px',
@@ -52,12 +81,12 @@ const imageStyle: React.CSSProperties = {
     width: '100%',
     height: 'auto',
     borderRadius: '10px',
-    userSelect: 'none', // Make the image non-selectable
+    userSelect: 'none',
 };
 
 const nonSelectableTextStyle: React.CSSProperties = {
-    userSelect: 'none', // Make the text non-selectable
-    margin: 0, // Remove default margin
+    userSelect: 'none',
+    margin: 0,
 };
 
 export default SwipeableCard;

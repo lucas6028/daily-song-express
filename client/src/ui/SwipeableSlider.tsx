@@ -11,27 +11,48 @@ interface SwipeableSliderProps {
 }
 
 const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items }) => {
-    const [index, setIndex] = useState<number>(0);
+    const [index, setIndex] = useState(0);
+    const [isSwiping, setIsSwiping] = useState(false);
+    const [swipeDirection, setSwipeDirection] = useState<'left' | 'right'>('right');
 
-    const handleSwipeLeft = () => {
-        setIndex((prevIndex) => (prevIndex < items.length - 1 ? prevIndex + 1 : 0));
+    const handleSwipe = (direction: 'left' | 'right') => {
+        if (isSwiping) return;
+
+        setSwipeDirection(direction);
+        setIsSwiping(true);
+
+        setTimeout(() => {
+            setIndex((prevIndex) => prevIndex + 1);
+            setIsSwiping(false);
+        }, 600); // Match this delay with the transition time
     };
 
-    const handleSwipeRight = () => {
-        setIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : items.length - 1));
-    };
+    const currentItem = items[index];
+    const nextItem = items[index + 1];
 
     return (
         <div style={sliderStyle}>
-            {items.map((item, i) => (
+            {currentItem && (
                 <SwipeableCard
-                    key={item.id}
-                    item={item}
-                    onSwipeLeft={handleSwipeLeft}
-                    onSwipeRight={handleSwipeRight}
-                    isActive={i === index} // Pass down if the card is active
+                    key={currentItem.id}
+                    item={currentItem}
+                    onSwipeLeft={() => handleSwipe('left')}
+                    onSwipeRight={() => handleSwipe('right')}
+                    isActive={true}
+                    isSwiping={isSwiping}
+                    swipeDirection={swipeDirection}
                 />
-            ))}
+            )}
+            {nextItem && (
+                <SwipeableCard
+                    key={nextItem.id}
+                    item={nextItem}
+                    isActive={false}
+                    isSwiping={false}
+                    swipeDirection={swipeDirection}
+                />
+            )}
+            {!currentItem && <div style={emptyMessageStyle}>No more cards</div>}
         </div>
     );
 };
@@ -44,6 +65,12 @@ const sliderStyle: React.CSSProperties = {
     alignItems: 'center',
     position: 'relative',
     overflow: 'hidden',
+};
+
+const emptyMessageStyle: React.CSSProperties = {
+    color: '#888',
+    fontSize: '24px',
+    fontWeight: 'bold',
 };
 
 export default SwipeableSlider;
