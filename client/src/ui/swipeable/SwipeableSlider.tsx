@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SwipeableCard from './SwipeableCard';
+import styels from './SwipeableSlider.module.css';
 
 interface SwipeableSliderProps {
     items: {
@@ -36,7 +37,7 @@ const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items, onCardClick })
     const nextItem = items[index + 1];
 
     return (
-        <div style={sliderStyle}>
+        <div className={styels.slider}>
             {currentItem && (
                 <SwipeableCard
                     key={currentItem.id}
@@ -58,25 +59,9 @@ const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items, onCardClick })
                     swipeDirection={swipeDirection}
                 />
             )}
-            {!currentItem && <div style={emptyMessageStyle}>No more cards</div>}
+            {!currentItem && <div className={styels.emptyMessage}>No more cards</div>}
         </div>
     );
-};
-
-const sliderStyle: React.CSSProperties = {
-    width: '100%',
-    height: '55vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-    overflow: 'hidden',
-};
-
-const emptyMessageStyle: React.CSSProperties = {
-    color: '#888',
-    fontSize: '24px',
-    fontWeight: 'bold',
 };
 
 export default SwipeableSlider;

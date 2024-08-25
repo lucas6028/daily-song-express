@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
 import Profile from "../api/Profile";
-import Loading from "../loading/Loading";
-import NavigationButton from "../button/NavigationButton";
+import Loading from "../../ui/loading/Loading";
+import NavigationButton from "../../ui/button/NavigationButton";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);

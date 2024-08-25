@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SpotifyTracksResponse, Track } from "../types"
 import axios from 'axios';
-import Loading from '../loading/Loading';
+import Loading from '../../ui/loading/Loading';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);

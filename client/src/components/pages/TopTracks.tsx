@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Loading from "../loading/Loading";
+import Loading from "../../ui/loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import { GetToken } from "../auth/GetToken";
-import SwipeableSlider from "../../ui/SwipeableSlider";
+import SwipeableSlider from "../../ui/swipeable/SwipeableSlider";
 
 
 function TopTrack() {

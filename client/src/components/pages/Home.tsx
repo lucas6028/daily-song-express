@@ -1,5 +1,5 @@
-import LogInButton from '../button/LogInButton';
-import Hamster from '../hamster/Hamster';
+import LogInButton from '../../ui/button/LogInButton';
+import Hamster from '../../ui/hamster/Hamster';
 
 function Home() {
     return (

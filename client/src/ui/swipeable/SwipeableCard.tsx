@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSwipeable } from 'react-swipeable';
+import styles from './SwipeableCard.module.css';
 
 interface SwipeableCardProps {
     item: {
@@ -46,14 +47,14 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
         <div
             {...handlers}
             onClick={handleClick}
+            className={styles.card}
             style={{
-                ...cardStyle,
                 ...getCardTransitionStyle(isActive, isSwiping, swipeDirection)
             }}
         >
-            <img src={item.img} alt={item.title} style={imageStyle} />
-            <h3 style={nonSelectableTextStyle}>{item.title}</h3>
-            <p style={nonSelectableTextStyle}>{item.artist}</p>
+            <img src={item.img} alt={item.title} className={styles.img} />
+            <h3 className={styles.nonSelectableText}>{item.title}</h3>
+            <p className={styles.nonSelectableText}>{item.artist}</p>
         </div>
     );
 };
@@ -76,31 +77,6 @@ const getCardTransitionStyle = (
         transition: isActive ? 'none' : 'transform 0.6s ease',
         zIndex: isActive ? 1 : 0,
     };
-};
-
-const cardStyle: React.CSSProperties = {
-    width: '330px',
-    height: '440px',
-    borderRadius: '10px',
-    boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.2)',
-    backgroundColor: '#000',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-};
-
-const imageStyle: React.CSSProperties = {
-    width: 'auto',
-    height: 'auto',
-    borderRadius: '10px',
-    userSelect: 'none',
-};
-
-const nonSelectableTextStyle: React.CSSProperties = {
-    userSelect: 'none',
-    margin: 0,
 };
 
 export default SwipeableCard;
