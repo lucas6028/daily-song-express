@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
 import Profile from "../api/Profile";
-import Loading from "../../ui/loading/Loading";
 import NavigationButton from "../../ui/button/NavigationButton";
+import Hamster from "../../ui/hamster/Hamster";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -45,7 +45,10 @@ export default function Dashboard() {
         }, 5000);
         clearTimeout(timeout);
         return (
-            <Loading></Loading>
+            <>
+                <Hamster />
+                <h3>Loading...</h3>
+            </>
         );
     }
     return (

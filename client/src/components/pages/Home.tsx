@@ -1,14 +1,16 @@
 import LogInButton from '../../ui/button/LogInButton';
-import Hamster from '../../ui/hamster/Hamster';
 
 function Home() {
     return (
         <>
             <h1>Daily Song</h1>
-            <Hamster></Hamster>
+            <img src='/src/assets/DJ.jpg' alt='DJ.jpg' />
+            {/* <Hamster></Hamster> */}
             <LogInButton></LogInButton>
         </>
     );
 }
+// Photo by Marcela Laskoski on Unsplash
+// https://reurl.cc/0dEKq9
 
 export default Home;
