@@ -3,10 +3,14 @@ import SwipeableCard from './SwipeableCard';
 
 interface SwipeableSliderProps {
     items: {
-        id: number;
-        title: string;
-        description: string;
-        imageUrl: string;
+        albumName: string,
+        albumUri: string,
+        img: string,
+        artist: string,
+        artistUri: string,
+        title: string,
+        id: string,
+        trackUri: string,
     }[];
 }
 

@@ -3,10 +3,14 @@ import { useSwipeable } from 'react-swipeable';
 
 interface SwipeableCardProps {
     item: {
-        id: number;
-        title: string;
-        description: string;
-        imageUrl: string;
+        albumName: string,
+        albumUri: string,
+        img: string,
+        artist: string,
+        artistUri: string,
+        title: string,
+        id: string,
+        trackUri: string,
     };
     onSwipeLeft?: () => void;
     onSwipeRight?: () => void;
@@ -37,9 +41,9 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
                 ...getCardTransitionStyle(isActive, isSwiping, swipeDirection)
             }}
         >
-            <img src={item.imageUrl} alt={item.title} style={imageStyle} />
+            <img src={item.img} alt={item.title} style={imageStyle} />
             <h2 style={nonSelectableTextStyle}>{item.title}</h2>
-            <p style={nonSelectableTextStyle}>{item.description}</p>
+            <p style={nonSelectableTextStyle}>{item.artist}</p>
         </div>
     );
 };

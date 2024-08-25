@@ -4,6 +4,7 @@ import Loading from "../loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import { GetToken } from "../auth/GetToken";
+import SwipeableSlider from "../../ui/SwipeableSlider";
 
 
 function TopTrack() {
@@ -69,6 +70,7 @@ function TopTrack() {
     return (
         <div className="container">
             <h1>Top Tracks</h1>
+            <SwipeableSlider items={searchResults} />
             <SpotifyWebPlayer showSaveIcon callback={(state) => {
                 if (!state.isPlaying) {
                     setPlay(false);
