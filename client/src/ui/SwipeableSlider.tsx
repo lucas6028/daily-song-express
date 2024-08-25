@@ -12,9 +12,10 @@ interface SwipeableSliderProps {
         id: string,
         trackUri: string,
     }[];
+    onCardClick?: (newUri: string) => void;
 }
 
-const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items }) => {
+const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items, onCardClick }) => {
     const [index, setIndex] = useState(0);
     const [isSwiping, setIsSwiping] = useState(false);
     const [swipeDirection, setSwipeDirection] = useState<'left' | 'right'>('right');
@@ -42,6 +43,7 @@ const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items }) => {
                     item={currentItem}
                     onSwipeLeft={() => handleSwipe('left')}
                     onSwipeRight={() => handleSwipe('right')}
+                    onClick={onCardClick}
                     isActive={true}
                     isSwiping={isSwiping}
                     swipeDirection={swipeDirection}
@@ -63,7 +65,7 @@ const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items }) => {
 
 const sliderStyle: React.CSSProperties = {
     width: '100%',
-    height: '100vh',
+    height: '55vh',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

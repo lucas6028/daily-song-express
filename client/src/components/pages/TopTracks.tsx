@@ -15,7 +15,7 @@ function TopTrack() {
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
 
-    const changeUri = (newUri: string) => {
+    const handleCardClick = (newUri: string) => {
         setUri(newUri);
     }
 
@@ -70,7 +70,8 @@ function TopTrack() {
     return (
         <div className="container">
             <h1>Top Tracks</h1>
-            <SwipeableSlider items={searchResults} />
+            <SwipeableSlider items={searchResults} onCardClick={handleCardClick} />
+            <br />
             <SpotifyWebPlayer showSaveIcon callback={(state) => {
                 if (!state.isPlaying) {
                     setPlay(false);
@@ -79,18 +80,6 @@ function TopTrack() {
                 play={play}
                 token={token}
                 uris={[uri]} />
-            <br></br>
-            <div>
-                {searchResults.map((track) => (
-                    <div key={track.id} onClick={() => changeUri(track.trackUri)}>
-                        <img src={track.img} alt={track.title} />
-                        <div>
-                            <p>{track.title}</p>
-                            <p>{track.artist}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
         </div>
     );
 }

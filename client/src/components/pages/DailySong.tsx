@@ -54,17 +54,17 @@ function DailySong() {
     return (
         <>
             <h1>Daily Song</h1>
-            <ul>
+            <div>
                 {searchResults.map((track) => (
-                    <li key={track.id}>
+                    <div key={track.id}>
                         <img src={track.img} alt={track.title}></img>
                         <div>
                             <p>{track.title}</p>
                             <p>{track.artist}</p>
                         </div>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </>
     )
 }

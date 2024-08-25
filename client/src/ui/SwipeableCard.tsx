@@ -14,6 +14,7 @@ interface SwipeableCardProps {
     };
     onSwipeLeft?: () => void;
     onSwipeRight?: () => void;
+    onClick?: (newUri: string) => void;
     isActive: boolean;
     isSwiping: boolean;
     swipeDirection: 'left' | 'right';
@@ -23,6 +24,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
     item,
     onSwipeLeft,
     onSwipeRight,
+    onClick,
     isActive,
     isSwiping,
     swipeDirection
@@ -33,16 +35,24 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
         trackMouse: true,
     });
 
+    const handleClick = () => {
+        if (onClick) {
+            console.log(`change the uri: ${item.trackUri}`);
+            onClick(item.trackUri);
+        }
+    };
+
     return (
         <div
             {...handlers}
+            onClick={handleClick}
             style={{
                 ...cardStyle,
                 ...getCardTransitionStyle(isActive, isSwiping, swipeDirection)
             }}
         >
             <img src={item.img} alt={item.title} style={imageStyle} />
-            <h2 style={nonSelectableTextStyle}>{item.title}</h2>
+            <h3 style={nonSelectableTextStyle}>{item.title}</h3>
             <p style={nonSelectableTextStyle}>{item.artist}</p>
         </div>
     );
@@ -69,8 +79,8 @@ const getCardTransitionStyle = (
 };
 
 const cardStyle: React.CSSProperties = {
-    width: '300px',
-    height: '400px',
+    width: '330px',
+    height: '440px',
     borderRadius: '10px',
     boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.2)',
     backgroundColor: '#000',
@@ -82,7 +92,7 @@ const cardStyle: React.CSSProperties = {
 };
 
 const imageStyle: React.CSSProperties = {
-    width: '100%',
+    width: 'auto',
     height: 'auto',
     borderRadius: '10px',
     userSelect: 'none',

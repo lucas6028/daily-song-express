@@ -32,7 +32,6 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/token", (req, res) => {
-  // Example: retrieve token from a secure source instead of a global variable
   const token = spotifyAPI.getAccessToken();
   if (token) {
     res.send(token);

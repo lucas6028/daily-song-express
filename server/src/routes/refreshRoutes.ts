@@ -11,7 +11,7 @@ router.post("/", (req, res) => {
 
       // Save the access token so that it's used in future calls
       spotifyAPI.setAccessToken(data.body["access_token"]);
-      console.log(data.body["access_token"]);
+      // console.log(data.body["access_token"]);
       res.sendStatus(200);
     })
     .catch((err) => {
