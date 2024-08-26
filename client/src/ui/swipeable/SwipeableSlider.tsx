@@ -1,20 +1,7 @@
 import React, { useState } from 'react';
 import SwipeableCard from './SwipeableCard';
 import styels from './SwipeableSlider.module.css';
-
-interface SwipeableSliderProps {
-    items: {
-        albumName: string,
-        albumUri: string,
-        img: string,
-        artist: string,
-        artistUri: string,
-        title: string,
-        id: string,
-        trackUri: string,
-    }[];
-    onCardClick?: (newUri: string) => void;
-}
+import { SwipeableSliderProps } from '../../components/types';
 
 const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items, onCardClick }) => {
     const [index, setIndex] = useState(0);

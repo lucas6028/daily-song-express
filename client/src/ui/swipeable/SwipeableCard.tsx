@@ -1,25 +1,7 @@
 import React from 'react';
 import { useSwipeable } from 'react-swipeable';
 import styles from './SwipeableCard.module.css';
-
-interface SwipeableCardProps {
-    item: {
-        albumName: string,
-        albumUri: string,
-        img: string,
-        artist: string,
-        artistUri: string,
-        title: string,
-        id: string,
-        trackUri: string,
-    };
-    onSwipeLeft?: () => void;
-    onSwipeRight?: () => void;
-    onClick?: (newUri: string) => void;
-    isActive: boolean;
-    isSwiping: boolean;
-    swipeDirection: 'left' | 'right';
-}
+import { SwipeableCardProps } from '../../components/types';
 
 const SwipeableCard: React.FC<SwipeableCardProps> = ({
     item,

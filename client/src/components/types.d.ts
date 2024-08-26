@@ -58,3 +58,36 @@ export interface Track {
   trackUri: string;
   img: string;
 }
+
+export interface SwipeableSliderProps {
+  items: {
+    albumName: string;
+    albumUri: string;
+    img: string;
+    artist: string;
+    artistUri: string;
+    title: string;
+    id: string;
+    trackUri: string;
+  }[];
+  onCardClick?: (newUri: string) => void;
+}
+
+export interface SwipeableCardProps {
+  item: {
+    albumName: string;
+    albumUri: string;
+    img: string;
+    artist: string;
+    artistUri: string;
+    title: string;
+    id: string;
+    trackUri: string;
+  };
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
+  onClick?: (newUri: string) => void;
+  isActive: boolean;
+  isSwiping: boolean;
+  swipeDirection: "left" | "right";
+}
