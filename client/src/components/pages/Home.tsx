@@ -1,10 +1,11 @@
 import LogInButton from '../../ui/button/LogInButton';
+import DJImg from '../../assets/DJ.jpg'
 
 function Home() {
     return (
         <>
             <h1>Daily Song</h1>
-            <img src='/src/assets/DJ.jpg' alt='DJ.jpg' />
+            <img src={DJImg} alt='DJ.jpg' />
             {/* <Hamster></Hamster> */}
             <LogInButton></LogInButton>
         </>
