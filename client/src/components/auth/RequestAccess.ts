@@ -26,7 +26,7 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
     })
     .catch((err) => {
       console.error("Error posting code:", err);
-      localStorage.setItem("hasToken", "no");
+      sessionStorage.setItem("hasToken", "no");
       window.location.href = "/";
 
       return false;
