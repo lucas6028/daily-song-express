@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     res.json({ accessToken, refreshToken, expiresIn });
   } catch (err) {
     console.error("Error during authorization code grant", err);
-    console.log("redirect URI:" + process.env.API_REDIRECT_URI);
+    console.log("redirect uri:" + process.env.API_REDIRECT_URI);
     res.status(400).json({ error: "Failed to retrieve tokens" });
   }
 });
