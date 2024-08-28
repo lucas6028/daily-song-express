@@ -59,7 +59,7 @@ function TopTrack() {
         fetchTopTracks();
     }, []);
 
-    if (loading) {
+    if (loading || token === "") {
         return <Loading></Loading>;
     }
 
