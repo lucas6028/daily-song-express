@@ -14,13 +14,13 @@ interface Artist {
 }
 
 // Define the structure of the album's image
-interface AlbumImage {
+interface Image {
   url: string;
 }
 
 // Define the structure of the album
 interface Album {
-  images: AlbumImage[];
+  images: Image[];
   uri: string;
   name: string;
 }
@@ -90,4 +90,23 @@ export interface SwipeableCardProps {
   isActive: boolean;
   isSwiping: boolean;
   swipeDirection: "left" | "right";
+}
+
+interface ArtistImg {
+  images: Image[];
+}
+export interface Artist {
+  name: string;
+  id: string;
+  popularity: number;
+  uri: string;
+  imgUrl: string;
+}
+
+interface SpotifyArtistResponse {
+  name: string;
+  id: string;
+  popularity: number;
+  uri: string;
+  images: Image[];
 }
