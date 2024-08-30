@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSwipeable } from 'react-swipeable';
 import styles from './SwipeableCard.module.css';
-import { SwipeableCardProps } from '../../components/types';
+import { SwipeableCardProps } from '../../types';
 
 const SwipeableCard: React.FC<SwipeableCardProps> = ({
     item,

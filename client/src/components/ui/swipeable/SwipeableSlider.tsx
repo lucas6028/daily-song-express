@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SwipeableCard from './SwipeableCard';
 import styels from './SwipeableSlider.module.css';
-import { SwipeableSliderProps } from '../../components/types';
+import { SwipeableSliderProps } from '../../types';
 
 const SwipeableSlider: React.FC<SwipeableSliderProps> = ({ items, onCardClick }) => {
     const [index, setIndex] = useState(0);

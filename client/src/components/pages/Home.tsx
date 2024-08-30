@@ -1,4 +1,4 @@
-import LogInButton from '../../ui/button/LogInButton';
+import LogInButton from '../ui/button/LogInButton';
 import DJImg from '../../assets/DJ.jpg'
 
 function Home() {
