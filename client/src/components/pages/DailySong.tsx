@@ -7,11 +7,19 @@ function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    // const seedArtists = "01u3qI3xMGFvktXyRSMGRZ";
     const seedGenres = "k-pop";
     const minPopularity = 10;
 
     useEffect(() => {
+        const fetchTopArtists = async () => {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`);
+                console.log(res);
+            } catch (err) {
+                console.error("Error while fetch top artists: " + err);
+            }
+        }
+
         const fetchRecommendTracks = async () => {
             try {
                 const res = await axios.get<SpotifyTracksResponse>(`${import.meta.env.VITE_SERVER_URL}/track/recommend`, {
@@ -42,6 +50,7 @@ function DailySong() {
             }
         }
 
+        fetchTopArtists();
         fetchRecommendTracks();
     }, [])
 
