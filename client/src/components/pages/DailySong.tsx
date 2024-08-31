@@ -1,3 +1,4 @@
+import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../types';
 import axios from 'axios';
@@ -43,6 +44,7 @@ function DailySong() {
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
                         params: {
+                            limit: 10,
                             seed_artists: artists[1].id,
                             // seed_genres: seedGenres,
                             min_popularity: minPopularity,
@@ -81,18 +83,25 @@ function DailySong() {
     }
     return (
         <>
-            <h1>Daily Song</h1>
-            <div>
-                {searchResults.map((track) => (
-                    <div key={track.id}>
-                        <img src={track.img} alt={track.title}></img>
-                        <div>
-                            <p>{track.title}</p>
-                            <p>{track.artist}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            <Container className="my-1">
+                <Carousel>
+                    {searchResults.map((track) => (
+                        <Carousel.Item key={track.id}>
+                            <Row className="justify-content-center">
+                                <Col xs={12} md={6}>
+                                    <Card className="bg-secondary bg-gradient text-dark">
+                                        <Card.Img variant="top" src={track.img} />
+                                        <Card.Body>
+                                            <Card.Title>{track.title}</Card.Title>
+                                            <Card.Text>{track.artist}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+            </Container>
         </>
     );
 }

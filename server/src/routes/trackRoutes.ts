@@ -31,9 +31,11 @@ router.get("/recommend", (req, res) => {
     | readonly string[]
     | undefined;
   const minPopularity = req.query.min_popularity as number | undefined;
+  const limit = req.query.limit as number | undefined;
 
   spotifyAPI
     .getRecommendations({
+      limit: limit,
       seed_artists: seedArtists,
       seed_genres: seedGenres,
       seed_tracks: seedTracks,
