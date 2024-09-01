@@ -1,11 +1,15 @@
 import styles from './PlayButton.module.css';
 
-function PlayButton() {
+interface PlayButtonProps {
+    onClick?: () => void;
+}
+
+function PlayButton({ onClick }: PlayButtonProps) {
     return (
         /* From Uiverse.io by Na3ar-17 */
         <div className={styles.container}>
             <label className={styles.switch}>
-                <input type="checkbox" />
+                <input type="checkbox" onClick={onClick} />
                 <span className={styles.slider}>
                     <span className={styles.title}>Play</span>
                     <span className={styles.ball}>
@@ -21,9 +25,9 @@ function PlayButton() {
                             >
                                 <path
                                     stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
                                     d="M8 18V6l8 6-8 6Z"
                                 ></path>
                             </svg>
@@ -35,4 +39,4 @@ function PlayButton() {
     )
 }
 
-export default PlayButton
+export default PlayButton;

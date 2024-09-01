@@ -3,14 +3,27 @@ import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../types';
 import axios from 'axios';
 import Loading from '../ui/loading/Loading';
+import SpotifyWebPlayer from 'react-spotify-web-playback';
+import { GetToken } from '../auth/GetToken';
 import PlayButton from '../ui/button/PlayButton';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [token, setToken] = useState<string>("");
+    const [uri, setUri] = useState<string>("");
+    const [play, setPlay] = useState<boolean>(false);
     const [artists, setArtists] = useState<Artist[]>([]);
     const minPopularity = 10;
+
+    const handleCardCLick = (newUri: string) => {
+        setUri(newUri);
+    }
+
+    useEffect(() => {
+        setPlay(true);
+    }, [uri])
 
     useEffect(() => {
         const fetchTopArtists = async () => {
@@ -35,6 +48,16 @@ function DailySong() {
             }
         };
 
+        const fetchToken = async () => {
+            try {
+                const token = await GetToken();
+                setToken(token);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchToken();
         fetchTopArtists();
     }, []);
 
@@ -95,7 +118,8 @@ function DailySong() {
                                         <Card.Body>
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
-                                            <PlayButton />
+                                            {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
+                                            <PlayButton onClick={() => handleCardCLick(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
                                 </Col>
@@ -104,6 +128,14 @@ function DailySong() {
                     ))}
                 </Carousel>
             </Container>
+            <SpotifyWebPlayer callback={(state) => {
+                if (!state.isPlaying) {
+                    setPlay(false);
+                }
+            }}
+                play={play}
+                token={token}
+                uris={[uri]} />
         </>
     );
 }
