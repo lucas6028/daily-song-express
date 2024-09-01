@@ -10,13 +10,12 @@ function DailySong() {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [artists, setArtists] = useState<Artist[]>([]);
-    // const seedGenres = "k-pop";
     const minPopularity = 10;
 
     useEffect(() => {
         const fetchTopArtists = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`);
+                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`);
                 console.log(res);
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
@@ -41,15 +40,13 @@ function DailySong() {
             if (artists.length === 0) return;
 
             try {
-                const res = await axios.get<SpotifyTracksResponse>(
+                const res = await axios.post<SpotifyTracksResponse>(
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
-                        params: {
-                            limit: 10,
-                            seed_artists: artists[1].id,
-                            // seed_genres: seedGenres,
-                            min_popularity: minPopularity,
-                        },
+                        limit: 10,
+                        seed_artists: artists[1].id,
+                        // seed_genres: seedGenres,
+                        min_popularity: minPopularity,
                     }
                 );
                 console.log(res);

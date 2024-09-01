@@ -3,7 +3,7 @@ import spotifyAPI from "../config/spotifyConfig";
 
 const router = Router();
 
-router.get("/myTop", async (req, res) => {
+router.post("/myTop", async (req, res) => {
   try {
     const { time_range = "medium_term", limit = 10, offset = 5 } = req.body;
     const data = await spotifyAPI.getMyTopArtists({
