@@ -1,4 +1,5 @@
 import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
+import PlayButton from '../ui/button/PlayButton';
 
 const Helloworld = () => {
     const cardData = [
@@ -31,6 +32,7 @@ const Helloworld = () => {
                                     <Card.Body>
                                         <Card.Title>{card.title}</Card.Title>
                                         <Card.Text>{card.text}</Card.Text>
+                                        <PlayButton />
                                     </Card.Body>
                                 </Card>
                             </Col>

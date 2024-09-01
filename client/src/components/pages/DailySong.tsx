@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../types';
 import axios from 'axios';
 import Loading from '../ui/loading/Loading';
+import PlayButton from '../ui/button/PlayButton';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -94,6 +95,7 @@ function DailySong() {
                                         <Card.Body>
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
+                                            <PlayButton />
                                         </Card.Body>
                                     </Card>
                                 </Col>
