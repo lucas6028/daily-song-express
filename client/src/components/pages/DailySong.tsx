@@ -15,7 +15,10 @@ function DailySong() {
     useEffect(() => {
         const fetchTopArtists = async () => {
             try {
-                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`);
+                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
+                    limit: 1,
+                    offset: Math.floor(Math.random() * 21),
+                });
                 console.log(res);
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
@@ -44,7 +47,7 @@ function DailySong() {
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
                         limit: 10,
-                        seed_artists: artists[1].id,
+                        seed_artists: artists[0].id,
                         // seed_genres: seedGenres,
                         min_popularity: minPopularity,
                     }
