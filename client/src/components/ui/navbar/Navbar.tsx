@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Image } from 'react-bootstrap';
 
 function NavScroll() {
     const githubUrl = 'https://github.com/lucas6028/daily-song';
@@ -31,7 +32,15 @@ function NavScroll() {
                         <Nav.Link eventKey={2} href="#memes">
                             Contact me
                         </Nav.Link>
-                        <img src='https://placehold.jp/40x40.png' alt='profile img' />
+                        <Nav.Link>
+                            <Image
+                                src="https://placehold.jp/30x30.png"
+                                roundedCircle
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                            />
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
