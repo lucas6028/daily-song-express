@@ -3,7 +3,7 @@ import NavigationButton from "./NavigationButton";
 function LogInButton() {
   return (
     <NavigationButton to="/dashboard" className="cssbuttons-io-button">
-      Get started
+      Log in
       <div className="icon">
         <svg
           height="24"
