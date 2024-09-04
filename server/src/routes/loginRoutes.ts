@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     spotifyAPI.setAccessToken(accessToken);
     spotifyAPI.setRefreshToken(refreshToken);
 
-    res.json({ accessToken, refreshToken, expiresIn });
+    res.json({ accessToken });
 
     setInterval(() => {
       RefreshToken();
