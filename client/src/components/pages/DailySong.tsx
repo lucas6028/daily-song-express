@@ -6,6 +6,7 @@ import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import { GetToken } from '../auth/GetToken';
 import PlayButton from '../ui/button/PlayButton';
+import NavScroll from '../ui/navbar/Navbar';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -108,6 +109,7 @@ function DailySong() {
     return (
         <>
             <Container className="my-1">
+                <NavScroll />
                 <Carousel>
                     {searchResults.map((track) => (
                         <Carousel.Item key={track.id}>
