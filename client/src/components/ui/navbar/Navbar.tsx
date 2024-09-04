@@ -30,7 +30,7 @@ function NavScroll() {
                     <Nav>
                         <Nav.Link href="#deets">Home</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Contact me
+                            About
                         </Nav.Link>
                         <NavDropdown
                             title={

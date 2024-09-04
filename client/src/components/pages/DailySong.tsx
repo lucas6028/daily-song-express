@@ -108,8 +108,8 @@ function DailySong() {
     }
     return (
         <>
+            <NavScroll />
             <Container className="my-1">
-                <NavScroll />
                 <Carousel>
                     {searchResults.map((track) => (
                         <Carousel.Item key={track.id}>
