@@ -1,5 +1,4 @@
 import axios from "axios";
-import RefreshToken from "./RefreshToken";
 
 export default function RequestAccess(urlCode: string): Promise<boolean> {
   console.log(`server url: ${import.meta.env.VITE_SERVER_URL}/login`);
@@ -14,11 +13,6 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
     .then((res) => {
       const expiresIn = res.data["expiresIn"];
       console.log("Expired in:", expiresIn);
-
-      // add interval to refresh token
-      setInterval(() => {
-        RefreshToken();
-      }, (expiresIn - 300) * 1000);
 
       window.history.pushState({}, "", "/dashboard");
 

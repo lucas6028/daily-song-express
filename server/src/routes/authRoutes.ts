@@ -1,5 +1,6 @@
 import { Router } from "express";
 import spotifyAPI from "../config/spotifyConfig";
+import RefreshToken from "../auth/RefreshToken";
 
 const router = Router();
 
@@ -15,16 +16,19 @@ router.post("/", async (req, res) => {
 
   try {
     const data = await spotifyAPI.authorizationCodeGrant(code);
-
-    console.log("Received access token, refresh token, expires in.");
     const accessToken = data.body["access_token"];
     const refreshToken = data.body["refresh_token"];
     const expiresIn = data.body["expires_in"];
+    console.log("Received access token, refresh token, expires in.");
 
     spotifyAPI.setAccessToken(accessToken);
     spotifyAPI.setRefreshToken(refreshToken);
 
     res.json({ accessToken, refreshToken, expiresIn });
+
+    setInterval(() => {
+      RefreshToken();
+    }, expiresIn * 1000);
   } catch (err) {
     console.log("redirect uri:" + process.env.API_REDIRECT_URI);
     console.error("Error during authorization code grant", err);
