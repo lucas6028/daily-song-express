@@ -28,19 +28,28 @@ function NavScroll() {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">Sign out</Nav.Link>
+                        <Nav.Link href="#deets">Home</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
                             Contact me
                         </Nav.Link>
-                        <Nav.Link>
-                            <Image
-                                src="https://placehold.jp/30x30.png"
-                                roundedCircle
-                                width="30"
-                                height="30"
-                                className="d-inline-block align-top"
-                            />
-                        </Nav.Link>
+                        <NavDropdown
+                            title={
+                                <Image
+                                    src="https://placehold.jp/150x150.png"
+                                    roundedCircle
+                                    width="30"
+                                    height="30"
+                                    className="d-inline-block align-top"
+                                />
+                            }
+                            id="profile-nav-dropdown"
+                        >
+                            <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
+                            <NavDropdown.Item href="#account">Account</NavDropdown.Item>
+                            <NavDropdown.Item href="#settings">Settings</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
