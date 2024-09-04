@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
 
     setInterval(() => {
       RefreshToken();
-    }, 1000);
+    }, 2000);
   } catch (err) {
     console.log("redirect uri:" + process.env.API_REDIRECT_URI);
     console.error("Error during authorization code grant", err);
