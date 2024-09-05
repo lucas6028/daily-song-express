@@ -5,14 +5,15 @@ import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import { ButtonGroup, Container } from "react-bootstrap";
 import NavScroll from "../ui/navbar/Navbar";
+import { getAccessToken } from "../../utils/cookieUtils";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
-    const [hasToken, setHasToken] = useState(false);
+    const [hasToken, setHasToken] = useState<boolean>(false);
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
-        if (sessionStorage.getItem("hasToken") === "yes") {
+        if (getAccessToken() !== undefined) {
             setHasToken(true);
             window.history.pushState({}, "", "/dashboard");
             return;
@@ -31,7 +32,6 @@ export default function Dashboard() {
             RequestAccess(urlCode)
                 .then((res: boolean) => {
                     setHasToken(res);
-                    sessionStorage.setItem("hasToken", "yes");
                 })
                 .catch((err) => {
                     console.error(err);
