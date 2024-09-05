@@ -6,9 +6,11 @@ import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { handleLogout } from '../../auth/Logout';
 
 function NavScroll() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");
+    const githubUrl = 'https://github.com/lucas6028/daily-song';
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -26,17 +28,6 @@ function NavScroll() {
         fetchProfile();
     }, [])
 
-    const handleLogout = async () => {
-        try {
-            const data = await axios.get(`${import.meta.env.VITE_SERVER_URL}/logout`);
-            console.log(data);
-            Cookies.remove("access_token")
-            window.location.href = "/";
-        } catch (err) {
-            console.error("Error while log out: " + err);
-        }
-    }
-    const githubUrl = 'https://github.com/lucas6028/daily-song';
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
             <Container>

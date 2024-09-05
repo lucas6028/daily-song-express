@@ -12,7 +12,6 @@ function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [token, setToken] = useState<string>("");
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
     const access_token = getAccessToken();
@@ -50,20 +49,10 @@ function TopTrack() {
             }
         };
 
-        const fetchToken = async () => {
-            try {
-                const token = await GetToken();
-                setToken(token);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchToken();
         fetchTopTracks();
     }, [access_token]);
 
-    if (loading || token === "") {
+    if (loading) {
         return <Loading></Loading>;
     }
 
@@ -101,14 +90,9 @@ function TopTrack() {
                 }
             }}
                 play={play}
-                token={token}
+                token={access_token}
                 uris={[uri]} />
         </>
-        // <div className="container">
-        //     <h1>Top Tracks</h1>
-        //     <SwipeableSlider items={searchResults} onCardClick={handleCardClick} />
-        //     <br />
-        // <div />
     );
 }
 
