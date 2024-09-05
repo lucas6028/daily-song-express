@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 import Loading from "../ui/loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
-import { GetToken } from "../auth/GetToken";
-// import SwipeableSlider from "../ui/swipeable/SwipeableSlider";
-import Cookies from "js-cookie";
 import PlayButton from "../ui/button/PlayButton";
 import NavScroll from "../ui/navbar/Navbar";
+import { getAccessToken } from "../../utils/cookieUtils";
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -17,7 +15,7 @@ function TopTrack() {
     const [token, setToken] = useState<string>("");
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
-    const access_token = Cookies.get("access_token");
+    const access_token = getAccessToken();
 
     const handleCardClick = (newUri: string) => {
         setUri(newUri);
