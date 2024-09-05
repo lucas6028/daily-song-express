@@ -106,7 +106,7 @@ function DailySong() {
                     {searchResults.map((track) => (
                         <Carousel.Item key={track.id}>
                             <Row className="justify-content-center">
-                                <Col xs={12} md={6}>
+                                <Col xs={10} sm={8} md={6} lg={4}>
                                     <Card className="bg-secondary bg-gradient text-dark">
                                         <Card.Img variant="top" src={track.img} />
                                         <Card.Body>
