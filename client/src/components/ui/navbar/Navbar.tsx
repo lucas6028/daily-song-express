@@ -4,8 +4,27 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 function NavScroll() {
+    const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const access_token = Cookies.get("access_token");
+                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/profile`, {
+                    access_token: access_token,
+                });
+                setProfileImg(res.data.body.images[0].url);
+            } catch (err) {
+                console.error("Error while get user profile" + err);
+            }
+        }
+
+        fetchProfile();
+    }, [])
+
     const handleLogout = async () => {
         try {
             const data = await axios.get(`${import.meta.env.VITE_SERVER_URL}/logout`);
@@ -45,7 +64,7 @@ function NavScroll() {
                         <NavDropdown
                             title={
                                 <Image
-                                    src="https://placehold.jp/150x150.png"
+                                    src={profileImg}
                                     roundedCircle
                                     width="30"
                                     height="30"

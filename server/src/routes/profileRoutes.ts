@@ -4,7 +4,9 @@ import spotifyAPI from "../config/spotifyConfig";
 const router = Router();
 
 // Get the authenticated user
-router.get("/", (req, res) => {
+router.post("/", (req, res) => {
+  const { access_token } = req.body;
+  spotifyAPI.setAccessToken(access_token);
   spotifyAPI
     .getMe()
     .then((data) => {

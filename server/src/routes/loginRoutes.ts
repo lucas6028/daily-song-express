@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
     const expiresIn = data.body["expires_in"];
     console.log("Received access token, refresh token, expires in.");
 
-    spotifyAPI.setAccessToken(accessToken);
+    // spotifyAPI.setAccessToken(accessToken);
     spotifyAPI.setRefreshToken(refreshToken);
 
     res.json({ accessToken, expiresIn });

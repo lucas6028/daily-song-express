@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
-import Profile from "../api/Profile";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import { ButtonGroup, Container } from "react-bootstrap";
+import NavScroll from "../ui/navbar/Navbar";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -53,14 +53,16 @@ export default function Dashboard() {
         );
     }
     return (
-        <Container>
-            <h1>Dashboard</h1>
-            <Profile></Profile>
-            <ButtonGroup vertical>
-                <NavigationButton to="/topTracks" className="btn btn-primary">Top Track</NavigationButton>
-                <NavigationButton to="/daily" className="btn btn-primary">Daily Song</NavigationButton>
-                <NavigationButton to="/challenges" className="btn btn-primary">Challenges</NavigationButton>
-            </ButtonGroup>
-        </Container>
+        <>
+            <NavScroll />
+            <Container>
+                <h1>Dashboard</h1>
+                <ButtonGroup vertical>
+                    <NavigationButton to="/topTracks" className="btn btn-primary">Top Track</NavigationButton>
+                    <NavigationButton to="/daily" className="btn btn-primary">Daily Song</NavigationButton>
+                    <NavigationButton to="/challenges" className="btn btn-primary">Challenges</NavigationButton>
+                </ButtonGroup>
+            </Container>
+        </>
     );
 }
