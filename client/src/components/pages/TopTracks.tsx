@@ -1,11 +1,14 @@
 import axios from "axios";
+import { Carousel, Container, Card, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import Loading from "../ui/loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import { GetToken } from "../auth/GetToken";
-import SwipeableSlider from "../ui/swipeable/SwipeableSlider";
+// import SwipeableSlider from "../ui/swipeable/SwipeableSlider";
 import Cookies from "js-cookie";
+import PlayButton from "../ui/button/PlayButton";
+import NavScroll from "../ui/navbar/Navbar";
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -71,10 +74,29 @@ function TopTrack() {
     }
 
     return (
-        <div className="container">
-            <h1>Top Tracks</h1>
-            <SwipeableSlider items={searchResults} onCardClick={handleCardClick} />
-            <br />
+        <>
+            <NavScroll />
+            <Container className="my-1">
+                <Carousel>
+                    {searchResults.map((track) => (
+                        <Carousel.Item key={track.id}>
+                            <Row className="justify-content-center">
+                                <Col xs={10} sm={8} md={6} lg={4}>
+                                    <Card className="bg-secondary bg-gradient text-dark">
+                                        <Card.Img variant="top" src={track.img} />
+                                        <Card.Body>
+                                            <Card.Title>{track.title}</Card.Title>
+                                            <Card.Text>{track.artist}</Card.Text>
+                                            {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
+                                            <PlayButton onClick={() => handleCardClick(track.trackUri)} />
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        </Carousel.Item>
+                    ))}
+                </Carousel>
+            </Container>
             <SpotifyWebPlayer showSaveIcon callback={(state) => {
                 if (!state.isPlaying) {
                     setPlay(false);
@@ -83,7 +105,12 @@ function TopTrack() {
                 play={play}
                 token={token}
                 uris={[uri]} />
-        </div>
+        </>
+        // <div className="container">
+        //     <h1>Top Tracks</h1>
+        //     <SwipeableSlider items={searchResults} onCardClick={handleCardClick} />
+        //     <br />
+        // <div />
     );
 }
 

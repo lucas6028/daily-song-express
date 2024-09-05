@@ -30,7 +30,7 @@ function NavScroll() {
         try {
             const data = await axios.get(`${import.meta.env.VITE_SERVER_URL}/logout`);
             console.log(data);
-            Cookies.remove("access_token");
+            Cookies.remove("access_token")
             window.location.href = "/";
         } catch (err) {
             console.error("Error while log out: " + err);

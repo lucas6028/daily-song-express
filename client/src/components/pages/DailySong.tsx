@@ -18,7 +18,7 @@ function DailySong() {
     const access_token = Cookies.get("access_token");
     const minPopularity = 10;
 
-    const handleCardCLick = (newUri: string) => {
+    const handleCardClick = (newUri: string) => {
         setUri(newUri);
     }
 
@@ -113,7 +113,7 @@ function DailySong() {
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
                                             {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
-                                            <PlayButton onClick={() => handleCardCLick(track.trackUri)} />
+                                            <PlayButton onClick={() => handleCardClick(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
                                 </Col>
