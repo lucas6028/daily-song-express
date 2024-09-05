@@ -4,18 +4,18 @@ import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../
 import axios from 'axios';
 import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
-import { GetToken } from '../auth/GetToken';
 import PlayButton from '../ui/button/PlayButton';
 import NavScroll from '../ui/navbar/Navbar';
+import Cookies from 'js-cookie';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [token, setToken] = useState<string>("");
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
     const [artists, setArtists] = useState<Artist[]>([]);
+    const access_token = Cookies.get("access_token");
     const minPopularity = 10;
 
     const handleCardCLick = (newUri: string) => {
@@ -30,6 +30,7 @@ function DailySong() {
         const fetchTopArtists = async () => {
             try {
                 const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
+                    access_token: access_token,
                     limit: 1,
                     offset: Math.floor(Math.random() * 21),
                 });
@@ -49,18 +50,8 @@ function DailySong() {
             }
         };
 
-        const fetchToken = async () => {
-            try {
-                const token = await GetToken();
-                setToken(token);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchToken();
         fetchTopArtists();
-    }, []);
+    }, [access_token]);
 
     useEffect(() => {
         const fetchRecommendTracks = async () => {
@@ -70,6 +61,7 @@ function DailySong() {
                 const res = await axios.post<SpotifyTracksResponse>(
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
+                        access_token: access_token,
                         limit: 10,
                         seed_artists: artists[0].id,
                         // seed_genres: seedGenres,
@@ -98,12 +90,12 @@ function DailySong() {
         };
 
         fetchRecommendTracks();
-    }, [artists]); // Include artists in the dependency array
+    }, [artists, access_token]); // Include artists in the dependency array
 
     if (loading) {
         return <Loading />;
     }
-    if (error) {
+    if (error || access_token === undefined) {
         return <p>{error}</p>;
     }
     return (
@@ -136,7 +128,7 @@ function DailySong() {
                 }
             }}
                 play={play}
-                token={token}
+                token={access_token}
                 uris={[uri]} />
         </>
     );

@@ -5,7 +5,9 @@ const router = Router();
 
 router.get("/", (req, res) => {});
 
-router.get("/myTop", (req, res) => {
+router.post("/myTop", (req, res) => {
+  const { access_token } = req.body;
+  spotifyAPI.setAccessToken(access_token);
   spotifyAPI
     .getMyTopTracks()
     .then((data) => {
@@ -18,9 +20,16 @@ router.get("/myTop", (req, res) => {
 });
 
 router.post("/recommend", (req, res) => {
-  const { seed_artists, seed_genres, seed_tracks, min_popularity, limit } =
-    req.body;
+  const {
+    access_token,
+    seed_artists,
+    seed_genres,
+    seed_tracks,
+    min_popularity,
+    limit,
+  } = req.body;
 
+  spotifyAPI.setAccessToken(access_token);
   spotifyAPI
     .getRecommendations({
       seed_artists: seed_artists,

@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 
 function NavScroll() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");
+
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -29,6 +30,7 @@ function NavScroll() {
         try {
             const data = await axios.get(`${import.meta.env.VITE_SERVER_URL}/logout`);
             console.log(data);
+            Cookies.remove("access_token");
             window.location.href = "/";
         } catch (err) {
             console.error("Error while log out: " + err);

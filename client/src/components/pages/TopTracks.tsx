@@ -5,7 +5,7 @@ import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import { GetToken } from "../auth/GetToken";
 import SwipeableSlider from "../ui/swipeable/SwipeableSlider";
-
+import Cookies from "js-cookie";
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -14,6 +14,7 @@ function TopTrack() {
     const [token, setToken] = useState<string>("");
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
+    const access_token = Cookies.get("access_token");
 
     const handleCardClick = (newUri: string) => {
         setUri(newUri);
@@ -26,7 +27,9 @@ function TopTrack() {
     useEffect(() => {
         const fetchTopTracks = async () => {
             try {
-                const res = await axios.get<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`);
+                const res = await axios.post<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`, {
+                    access_token: access_token,
+                });
                 const tracks = res.data.body.items.map((track) => ({
                     albumName: track.album.name,
                     albumUri: track.album.uri,
@@ -57,13 +60,13 @@ function TopTrack() {
 
         fetchToken();
         fetchTopTracks();
-    }, []);
+    }, [access_token]);
 
     if (loading || token === "") {
         return <Loading></Loading>;
     }
 
-    if (error) {
+    if (error || access_token === undefined) {
         return <p>{error}</p>;
     }
 
