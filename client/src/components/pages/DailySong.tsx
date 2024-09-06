@@ -1,12 +1,11 @@
 import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../types';
-import axios from 'axios';
 import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from '../ui/button/PlayButton';
 import NavScroll from '../ui/navbar/Navbar';
-import { getAccessToken } from '../../utils/cookieUtils';
+import axios from 'axios';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -15,7 +14,7 @@ function DailySong() {
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
     const [artists, setArtists] = useState<Artist[]>([]);
-    const access_token = getAccessToken();
+    const [access_token, setAccessToken] = useState<string | null>(null);
     const minPopularity = 10;
 
     const handleCardClick = (newUri: string) => {
@@ -27,13 +26,21 @@ function DailySong() {
     }, [uri])
 
     useEffect(() => {
+        const fetchToken = async () => {
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
+                console.log(res.data);
+                setAccessToken(res.data);
+            } catch (err) {
+                console.error("Error while get token: " + err);
+            }
+        }
         const fetchTopArtists = async () => {
             try {
                 const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
-                    access_token: access_token,
                     limit: 1,
                     offset: Math.floor(Math.random() * 21),
-                });
+                }, { withCredentials: true });
                 // console.log(res);
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
@@ -50,8 +57,9 @@ function DailySong() {
             }
         };
 
+        fetchToken();
         fetchTopArtists();
-    }, [access_token]);
+    }, []);
 
     useEffect(() => {
         const fetchRecommendTracks = async () => {
@@ -61,12 +69,12 @@ function DailySong() {
                 const res = await axios.post<SpotifyTracksResponse>(
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
-                        access_token: access_token,
                         limit: 10,
                         seed_artists: artists[0].id,
                         // seed_genres: seedGenres,
                         min_popularity: minPopularity,
-                    }
+                    },
+                    { withCredentials: true }
                 );
                 console.log(res);
                 const tracks: Track[] = res.data.body.tracks.map((track) => ({
@@ -90,12 +98,12 @@ function DailySong() {
         };
 
         fetchRecommendTracks();
-    }, [artists, access_token]); // Include artists in the dependency array
+    }, [artists]); // Include artists in the dependency array
 
     if (loading) {
         return <Loading />;
     }
-    if (error || access_token === undefined) {
+    if (error) {
         return <p>{error}</p>;
     }
     return (
@@ -122,14 +130,18 @@ function DailySong() {
                     ))}
                 </Carousel>
             </Container>
-            <SpotifyWebPlayer callback={(state) => {
-                if (!state.isPlaying) {
-                    setPlay(false);
-                }
-            }}
-                play={play}
-                token={access_token}
-                uris={[uri]} />
+            {access_token ?
+                <SpotifyWebPlayer callback={(state) => {
+                    if (!state.isPlaying) {
+                        setPlay(false);
+                    }
+                }}
+                    play={play}
+                    token={access_token}
+                    uris={[uri]} />
+                :
+                <p>No token!</p>
+            }
         </>
     );
 }

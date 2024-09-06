@@ -6,7 +6,13 @@ const router = Router();
 router.get("/", (req, res) => {});
 
 router.post("/myTop", (req, res) => {
-  const { access_token, limit } = req.body;
+  const { limit } = req.body;
+  const access_token = req.cookies["access_token"];
+
+  if (!access_token) {
+    return res.status(401).json({ error: "Access token is missing" });
+  }
+
   spotifyAPI.setAccessToken(access_token);
   spotifyAPI
     .getMyTopTracks({ limit: limit })
@@ -20,14 +26,13 @@ router.post("/myTop", (req, res) => {
 });
 
 router.post("/recommend", (req, res) => {
-  const {
-    access_token,
-    seed_artists,
-    seed_genres,
-    seed_tracks,
-    min_popularity,
-    limit,
-  } = req.body;
+  const { seed_artists, seed_genres, seed_tracks, min_popularity, limit } =
+    req.body;
+  const access_token = req.cookies["access_token"];
+
+  if (!access_token) {
+    return res.status(401).json({ error: "Access token is missing" });
+  }
 
   spotifyAPI.setAccessToken(access_token);
   spotifyAPI

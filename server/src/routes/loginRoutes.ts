@@ -50,9 +50,13 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/token", (req, res) => {
-  const token = spotifyAPI.getAccessToken();
-  if (token) {
-    res.send(token);
+  const access_token = req.cookies["access_token"];
+  if (!access_token) {
+    return res.status(401).json({ error: "Access token is missing" });
+  }
+
+  if (access_token) {
+    res.send(access_token);
   } else {
     res.status(401).json({ error: "Token not available" });
   }

@@ -6,7 +6,6 @@ const router = Router();
 // Get the authenticated user
 router.get("/", (req, res) => {
   const access_token = req.cookies["access_token"];
-  // console.log("profile: " + access_token);
 
   if (!access_token) {
     return res.status(401).json({ error: "Access token is missing" });

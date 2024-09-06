@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAccessToken } from "../../utils/cookieUtils";
+// import { setAccessToken } from "../../utils/cookieUtils";
 
 export default function RequestAccess(urlCode: string): Promise<boolean> {
   console.log(`server url: ${import.meta.env.VITE_SERVER_URL}/login`);
@@ -17,9 +17,10 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
     )
     .then((res) => {
       // const expiresIn = res.data["expiresIn"];
-      const access_token = res.data["accessToken"];
-      setAccessToken(access_token, 1 / 24);
+      // const access_token = res.data["accessToken"];
+      // setAccessToken(access_token, 1 / 24);
       // console.log("Expired in:", expiresIn);
+      console.log(res.data);
 
       window.history.pushState({}, "", "/dashboard");
 

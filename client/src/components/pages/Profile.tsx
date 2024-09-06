@@ -2,12 +2,9 @@ import axios from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-// import { getAccessToken } from "../../utils/cookieUtils";
 import './Profile.css';
 
 export default function Profile() {
-    // const access_token = getAccessToken();
-
     const defaultProfile = useMemo(() => ({
         name: "Guest",
         imgUrl: "https://placehold.jp/150x150.png",
@@ -20,8 +17,6 @@ export default function Profile() {
     const [profile, setProfile] = useState(defaultProfile);
 
     const fetchProfile = useCallback(async () => {
-        // if (!access_token) return;
-
         try {
             const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/profile`, { withCredentials: true });
             const { display_name, images, product, id, followers, external_urls } = res.data.body;

@@ -7,10 +7,16 @@ router.get("/", (req, res) => {
   res.send("Spotify playlist creation endpoint");
 });
 
-router.post("/create", async (req, res) => {
+router.get("/create", async (req, res) => {
   try {
     const { name = "My playlist", isPublic = false } = req.body;
+    const access_token = req.cookies["access_token"];
 
+    if (!access_token) {
+      return res.status(401).json({ error: "Access token is missing" });
+    }
+
+    spotifyAPI.setAccessToken(access_token);
     const data = await spotifyAPI.createPlaylist(name, { public: isPublic });
 
     console.log("Playlist created:", data);
@@ -26,7 +32,13 @@ router.post("/create", async (req, res) => {
 router.post("/add", async (req, res) => {
   try {
     const { playlistID, track } = req.body;
+    const access_token = req.cookies["access_token"];
     const data = await spotifyAPI.addTracksToPlaylist(playlistID, track);
+
+    if (!access_token) {
+      return res.status(401).json({ error: "Access token is missing" });
+    }
+    spotifyAPI.setAccessToken(access_token);
     console.log("Added track to playlist");
     res.status(201);
   } catch (err) {
