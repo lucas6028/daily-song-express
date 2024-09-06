@@ -5,7 +5,6 @@ import RequestAccess from "../auth/RequestAccess";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import NavScroll from "../ui/navbar/Navbar";
-import { getAccessToken } from "../../utils/cookieUtils";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -13,14 +12,10 @@ export default function Dashboard() {
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
-        if (getAccessToken() !== undefined) {
-            setHasToken(true);
-            window.history.pushState({}, "", "/dashboard");
-            return;
-        }
         if (!existingCode) {
             // Only redirect if there is no code in the URL
             RedirectURL();
+            // setHasToken(true);
         } else {
             setUrlCode(existingCode);
         }

@@ -4,12 +4,19 @@ import spotifyAPI from "../config/spotifyConfig";
 const router = Router();
 
 // Get the authenticated user
-router.post("/", (req, res) => {
-  const { access_token } = req.body;
+router.get("/", (req, res) => {
+  const access_token = req.cookies["access_token"];
+  // console.log("profile: " + access_token);
+
+  if (!access_token) {
+    return res.status(401).json({ error: "Access token is missing" });
+  }
+
   spotifyAPI.setAccessToken(access_token);
   spotifyAPI
     .getMe()
     .then((data) => {
+      res.cookie("profileId", data.body.id);
       res.json(data);
     })
     .catch((err) => {

@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import { handleLogout } from '../../auth/Logout';
 
 function NavScroll() {
@@ -15,10 +15,7 @@ function NavScroll() {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const access_token = Cookies.get("access_token");
-                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/profile`, {
-                    access_token: access_token,
-                });
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/profile`, { withCredentials: true });
                 setProfileImg(res.data.body.images[0].url);
             } catch (err) {
                 console.error("Error while get user profile" + err);

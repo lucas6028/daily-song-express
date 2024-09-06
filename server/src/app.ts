@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import authRoutes from "./routes/loginRoutes";
 import refreshRoutes from "./routes/refreshRoutes";
 import profileRoutes from "./routes/profileRoutes";
@@ -11,7 +12,13 @@ import logoutRoutes from "./routes/logoutRoutes";
 const app = express();
 
 app.use(express.json()); // Middleware to parse JSON
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.API_CLIENT_URI, // Specify the exact origin
+    credentials: true, // Allow cookies to be sent with requests
+  })
+);
+app.use(cookieParser());
 
 app.use("/login", authRoutes);
 app.use("logout", logoutRoutes);

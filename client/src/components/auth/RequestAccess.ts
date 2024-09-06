@@ -10,7 +10,11 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
 
   // Post the authorization code to the server
   return axios
-    .post(`${import.meta.env.VITE_SERVER_URL}/login`, { code: urlCode })
+    .post(
+      `${import.meta.env.VITE_SERVER_URL}/login`,
+      { code: urlCode },
+      { withCredentials: true }
+    )
     .then((res) => {
       // const expiresIn = res.data["expiresIn"];
       const access_token = res.data["accessToken"];
