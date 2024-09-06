@@ -34,7 +34,7 @@ function DailySong() {
                     limit: 1,
                     offset: Math.floor(Math.random() * 21),
                 });
-                console.log(res);
+                // console.log(res);
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
                     id: art.id,

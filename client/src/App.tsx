@@ -6,6 +6,7 @@ import Helloworld from "./components/pages/Helloworld";
 import TopTracks from "./components/pages/TopTracks";
 import Challenges from "./components/pages/Challenges";
 import DailySong from "./components/pages/DailySong";
+import Profile from "./components/pages/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/topTracks" element={<TopTracks></TopTracks>}></Route>
           <Route path="/challenges" element={<Challenges></Challenges>}></Route>
           <Route path="/daily" element={<DailySong></DailySong>}></Route>
+          <Route path="/profile" element={<Profile></Profile>}></Route>
         </Routes>
       </Router>
     </>
