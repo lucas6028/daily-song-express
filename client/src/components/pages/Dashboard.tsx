@@ -5,20 +5,32 @@ import RequestAccess from "../auth/RequestAccess";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import NavScroll from "../ui/navbar/Navbar";
+import axios from "axios";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
     const [hasToken, setHasToken] = useState<boolean>(false);
 
     useEffect(() => {
-        const existingCode = new URLSearchParams(window.location.search).get("code");
-        if (!existingCode) {
-            // Only redirect if there is no code in the URL
-            RedirectURL();
-            // setHasToken(true);
-        } else {
-            setUrlCode(existingCode);
+        const fetchToken = async () => {
+            try {
+                await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
+                window.history.pushState({}, "", "/dashboard");
+                setHasToken(true);
+            } catch (err) {
+                console.error("Error while get token: " + err);
+                const existingCode = new URLSearchParams(window.location.search).get("code");
+                if (!existingCode) {
+                    // Only redirect if there is no code in the URL
+                    RedirectURL();
+                    // setHasToken(true);
+                } else {
+                    setUrlCode(existingCode);
+                }
+            }
         }
+
+        fetchToken();
     }, []);
 
     useEffect(() => {
