@@ -6,10 +6,10 @@ const router = Router();
 router.get("/", (req, res) => {});
 
 router.post("/myTop", (req, res) => {
-  const { access_token } = req.body;
+  const { access_token, limit } = req.body;
   spotifyAPI.setAccessToken(access_token);
   spotifyAPI
-    .getMyTopTracks()
+    .getMyTopTracks({ limit: limit })
     .then((data) => {
       // console.log(data);
       res.json(data);

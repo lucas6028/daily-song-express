@@ -29,6 +29,7 @@ function TopTrack() {
             try {
                 const res = await axios.post<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`, {
                     access_token: access_token,
+                    limit: 10,
                 });
                 const tracks = res.data.body.items.map((track) => ({
                     albumName: track.album.name,
