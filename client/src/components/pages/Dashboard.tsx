@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import { ButtonGroup, Container } from "react-bootstrap";
 import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
-import { ButtonGroup, Container } from "react-bootstrap";
 import NavScroll from "../ui/navbar/Navbar";
 import { getAccessToken } from "../../utils/cookieUtils";
 
@@ -23,7 +23,6 @@ export default function Dashboard() {
             RedirectURL();
         } else {
             setUrlCode(existingCode);
-            // console.log("Authorization Code:", existingCode);
         }
     }, []);
 
