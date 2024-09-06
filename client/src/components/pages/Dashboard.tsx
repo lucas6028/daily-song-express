@@ -4,7 +4,7 @@ import RedirectURL from "../auth/RedirectURL";
 import RequestAccess from "../auth/RequestAccess";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
-import NavScroll from "../ui/navbar/Navbar";
+import NavBar from "../ui/navbar/Navbar";
 import axios from "axios";
 
 export default function Dashboard() {
@@ -15,7 +15,6 @@ export default function Dashboard() {
         const fetchToken = async () => {
             try {
                 await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
-                window.history.pushState({}, "", "/dashboard");
                 setHasToken(true);
             } catch (err) {
                 console.error("Error while get token: " + err);
@@ -23,7 +22,7 @@ export default function Dashboard() {
                 if (!existingCode) {
                     // Only redirect if there is no code in the URL
                     RedirectURL();
-                    // setHasToken(true);
+                    setHasToken(true);
                 } else {
                     setUrlCode(existingCode);
                 }
@@ -60,7 +59,7 @@ export default function Dashboard() {
     }
     return (
         <>
-            <NavScroll />
+            <NavBar />
             <Container>
                 <h1>Dashboard</h1>
                 <ButtonGroup vertical>

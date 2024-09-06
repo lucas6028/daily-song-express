@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 // import Cookies from 'js-cookie';
 import { handleLogout } from '../../auth/Logout';
 
-function NavScroll() {
+function NavBar() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");
     const githubUrl = 'https://github.com/lucas6028/daily-song';
 
@@ -76,4 +76,4 @@ function NavScroll() {
     );
 }
 
-export default NavScroll;
+export default NavBar;

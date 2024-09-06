@@ -4,7 +4,7 @@ import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../
 import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from '../ui/button/PlayButton';
-import NavScroll from '../ui/navbar/Navbar';
+import NavBar from '../ui/navbar/Navbar';
 import axios from 'axios';
 
 function DailySong() {
@@ -108,7 +108,7 @@ function DailySong() {
     }
     return (
         <>
-            <NavScroll />
+            <NavBar />
             <Container className="my-1">
                 <Carousel>
                     {searchResults.map((track) => (

@@ -6,7 +6,6 @@ function Home() {
         <>
             <h1>Daily Song</h1>
             <img src={DJImg} alt='DJ.jpg' />
-            {/* <Hamster></Hamster> */}
             <LogInButton></LogInButton>
         </>
     );

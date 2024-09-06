@@ -5,7 +5,7 @@ import Loading from "../ui/loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import PlayButton from "../ui/button/PlayButton";
-import NavScroll from "../ui/navbar/Navbar";
+import NavBar from "../ui/navbar/Navbar";
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -73,7 +73,7 @@ function TopTrack() {
 
     return (
         <>
-            <NavScroll />
+            <NavBar />
             <Container className="my-1">
                 <Carousel>
                     {searchResults.map((track) => (

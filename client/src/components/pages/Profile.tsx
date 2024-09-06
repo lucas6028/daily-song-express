@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './Profile.css';
+import NavBar from "../ui/navbar/Navbar";
 
 export default function Profile() {
     const defaultProfile = useMemo(() => ({
@@ -39,22 +40,25 @@ export default function Profile() {
     }, [fetchProfile,]);
 
     return (
-        <div className="profile-container d-flex justify-content-center mt-4">
-            <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
-                <Card.Img className="rounded-circle mx-auto mt-3 profile-img" variant="top" src={profile.imgUrl} alt="Profile Picture" />
-                <Card.Body className="text-center">
-                    <Card.Title className="mb-2">{profile.name}</Card.Title>
-                    <Card.Text className="mb-3">
-                        <ul className="list-unstyled">
-                            <li><strong>Subscription:</strong> {profile.product}</li>
-                            <li><strong>Followers:</strong> {profile.followers}</li>
-                        </ul>
-                    </Card.Text>
-                    <Button className="spotify-btn" variant="success" href={profile.spotifyUrl} target="_blank" rel="noopener noreferrer">
-                        View on Spotify
-                    </Button>
-                </Card.Body >
-            </Card >
-        </div>
+        <>
+            <NavBar />
+            <div className="profile-container d-flex justify-content-center mt-4">
+                <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
+                    <Card.Img className="rounded-circle mx-auto mt-3 profile-img" variant="top" src={profile.imgUrl} alt="Profile Picture" />
+                    <Card.Body className="text-center">
+                        <Card.Title className="mb-2">{profile.name}</Card.Title>
+                        <Card.Text className="mb-3">
+                            <ul className="list-unstyled">
+                                <li><strong>Subscription:</strong> {profile.product}</li>
+                                <li><strong>Followers:</strong> {profile.followers}</li>
+                            </ul>
+                        </Card.Text>
+                        <Button className="spotify-btn" variant="success" href={profile.spotifyUrl} target="_blank" rel="noopener noreferrer">
+                            View on Spotify
+                        </Button>
+                    </Card.Body >
+                </Card >
+            </div>
+        </>
     );
 }
