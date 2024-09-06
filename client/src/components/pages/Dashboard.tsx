@@ -40,10 +40,6 @@ export default function Dashboard() {
     }, [urlCode]);
 
     if (!hasToken) {
-        const timeout = setTimeout(() => {
-            // location.reload();
-        }, 5000);
-        clearTimeout(timeout);
         return (
             <div className="loading-screen d-flex flex-column align-items-center">
                 <Hamster />

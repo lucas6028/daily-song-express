@@ -24,19 +24,19 @@
   border-color: #4c6ef5;
 }
 
-.loading-screen {
+/* .loading-screen {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f0f4f8;
-}
+} */
 
-.loading-text {
+/* .loading-text {
   font-size: 1.5rem;
   margin-top: 1rem;
   color: #333;
-}
+} */
 
 .dashboard-buttons {
   width: 100%;
