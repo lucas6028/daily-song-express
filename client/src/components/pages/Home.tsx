@@ -1,16 +1,15 @@
 import LogInButton from '../ui/button/LogInButton';
-import DJImg from '../../assets/DJ.jpg'
+import DJImg from '../../assets/DJ.jpg';
+import './Home.css';
 
 function Home() {
     return (
-        <>
-            <h1>Daily Song</h1>
-            <img src={DJImg} alt='DJ.jpg' />
-            <LogInButton></LogInButton>
-        </>
+        <div className="home-container d-flex flex-column align-items-center justify-content-center">
+            <h1 className="home-title">Daily Song</h1>
+            <img className="home-image" src={DJImg} alt='DJ' />
+            <LogInButton />
+        </div>
     );
 }
-// Photo by Marcela Laskoski on Unsplash
-// https://reurl.cc/0dEKq9
 
 export default Home;
