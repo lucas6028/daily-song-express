@@ -27,12 +27,12 @@ router.post("/", async (req, res) => {
     res.cookie("access_token", accessToken, {
       maxAge: expiresIn * 1000,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
     });
     res.cookie("refresh_token", refreshToken, {
       maxAge: expiresIn * 1000 * 30,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
     });
     // console.log("login: " + accessToken);
     res.send("Cookie set: access_token, refresh_token");
