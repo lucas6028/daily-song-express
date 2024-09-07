@@ -15,3 +15,6 @@ handlers:
 
 # Specify the build and start commands
 entrypoint: npm start
+
+health_check:
+  enable_health_check: True
