@@ -8,6 +8,7 @@ import trackRoutes from "./routes/trackRoutes";
 import artistRoutes from "./routes/artistRoutes";
 import playlistRoutes from "./routes/playlistRoutes";
 import logoutRoutes from "./routes/logoutRoutes";
+import rootRoutes from "./routes/rootRoutes";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(cookieParser());
 
+app.use("/", rootRoutes);
 app.use("/login", authRoutes);
 app.use("logout", logoutRoutes);
 app.use("/refresh", refreshRoutes);

@@ -21,17 +21,16 @@ router.post("/", async (req, res) => {
     const expiresIn = data.body["expires_in"];
     console.log("Received access token, refresh token, expires in.");
 
-    // Set access token in spotifyAPI if needed for other requests
     spotifyAPI.setAccessToken(accessToken);
     spotifyAPI.setRefreshToken(refreshToken);
 
     res.cookie("access_token", accessToken, {
       maxAge: expiresIn * 1000,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Only set secure in production
+      secure: process.env.NODE_ENV === "production",
     });
     res.cookie("refresh_token", refreshToken, {
-      maxAge: expiresIn * 1000 * 30, // Refresh token usually has a longer lifespan
+      maxAge: expiresIn * 1000 * 30,
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
     });
@@ -41,7 +40,7 @@ router.post("/", async (req, res) => {
     // Set interval for token refresh - consider a more robust strategy
     setInterval(() => {
       RefreshToken();
-    }, expiresIn * 1000 * 0.8); // Refresh token slightly before expiry
+    }, expiresIn * 1000 * 0.8);
   } catch (err) {
     console.log("redirect uri:" + process.env.API_REDIRECT_URI);
     console.error("Error during authorization code grant", err);
