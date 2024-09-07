@@ -16,7 +16,7 @@ app.use(express.json()); // Middleware to parse JSON
 app.use(
   cors({
     origin: process.env.API_CLIENT_URI, // Specify the exact origin
-    credentials: true, // Allow cookies to be sent with requests
+    credentials: true,
   })
 );
 app.use(cookieParser());
