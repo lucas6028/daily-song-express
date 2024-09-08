@@ -1,5 +1,5 @@
 import styles from './PlayButton.module.css';
-import playPhoto from '/src/assets/play-button.png';
+import playPhoto from '/src/assets/play-button1.png';
 
 interface PlayButtonProps {
     onClick?: () => void;

@@ -19,14 +19,6 @@
 }
 
 .button img {
-  width: 40px; /* Size of the play icon */
-  height: 40px;
-}
-
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  width: 37px; /* Size of the play icon */
+  height: 37px;
 }
