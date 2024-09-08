@@ -142,6 +142,7 @@ function DailySong() {
                     uris={[uri]}
                     initialVolume={50}
                     styles={{
+                        height: 50,
                         activeColor: '#1DB954', // Bright Spotify green for active elements
                         bgColor: '#333',
                         // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
@@ -150,6 +151,7 @@ function DailySong() {
                         sliderColor: '#1DB954', // Spotify green for the slider
                         sliderHandleColor: '#FFF', // White slider handle for better visibility
                         sliderTrackColor: '#555', // Darker track background for contrast
+                        sliderHeight: 7,
                         trackArtistColor: '#AAA', // Subtle light gray for artist name
                         trackNameColor: '#FFF', // White track name for visibility
                     }} />
