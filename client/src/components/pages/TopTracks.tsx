@@ -96,11 +96,12 @@ function TopTrack() {
                 </Carousel>
             </Container>
             {access_token ?
-                <SpotifyWebPlayer showSaveIcon callback={(state) => {
+                <SpotifyWebPlayer callback={(state) => {
                     if (!state.isPlaying) {
                         setPlay(false);
                     }
                 }}
+                    showSaveIcon
                     play={play}
                     token={access_token}
                     uris={[uri]}

@@ -136,6 +136,7 @@ function DailySong() {
                         setPlay(false);
                     }
                 }}
+                    showSaveIcon
                     play={play}
                     token={access_token}
                     uris={[uri]}
