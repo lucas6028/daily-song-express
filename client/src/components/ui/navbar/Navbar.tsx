@@ -33,7 +33,8 @@ function NavBar() {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/dashboard">Dashboard</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link href="/topTracks">Top Tracks</Nav.Link>
+                        <Nav.Link href="/daily">Daily</Nav.Link>
                         <NavDropdown title="Reference" id="collapsible-nav-dropdown">
                             <NavDropdown.Item href={githubUrl}>Github</NavDropdown.Item>
                             <NavDropdown.Item href="https://spotify.com">Spotify</NavDropdown.Item>
