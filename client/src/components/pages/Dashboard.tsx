@@ -22,7 +22,6 @@ export default function Dashboard() {
                 const existingCode = new URLSearchParams(window.location.search).get("code");
                 if (!existingCode) {
                     RedirectURL();
-                    setHasToken(true);
                 } else {
                     setUrlCode(existingCode);
                 }
