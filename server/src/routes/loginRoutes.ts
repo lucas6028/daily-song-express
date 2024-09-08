@@ -4,8 +4,9 @@ import RefreshToken from "../auth/RefreshToken";
 
 const router = Router();
 
-router.post("/", async (req, res) => {
-  const { code } = req.body;
+router.get("/", async (req, res) => {
+  const code = req.query.code as string;
+  // const { code } = req.body;
 
   if (!code) {
     console.error("Authorization code is missing from request");
@@ -36,7 +37,6 @@ router.post("/", async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
-    // console.log("login: " + accessToken);
     res.send("Cookie set: access_token, refresh_token");
 
     // Set interval for token refresh - consider a more robust strategy

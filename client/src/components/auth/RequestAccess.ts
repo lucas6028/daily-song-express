@@ -8,11 +8,12 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
   }
 
   return axios
-    .post(
-      `${import.meta.env.VITE_SERVER_URL}/login`,
-      { code: urlCode },
-      { withCredentials: true }
-    )
+    .get(`${import.meta.env.VITE_SERVER_URL}/login`, {
+      params: {
+        code: urlCode,
+      },
+      withCredentials: true,
+    })
     .then((res) => {
       console.log(res.data);
 
