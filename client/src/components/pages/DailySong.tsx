@@ -117,7 +117,7 @@ function DailySong() {
                                 <Col xs={12} md={6} lg={4}>
                                     <Card className="bg-secondary bg-gradient text-dark">
                                         <Card.Img variant="top" src={track.img} />
-                                        <Card.Body>
+                                        <Card.Body className="d-flex flex-column align-items-center">
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
                                             {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
@@ -139,7 +139,19 @@ function DailySong() {
                     play={play}
                     token={access_token}
                     uris={[uri]}
-                    initialVolume={50} />
+                    initialVolume={50}
+                    styles={{
+                        activeColor: '#1DB954', // Bright Spotify green for active elements
+                        bgColor: '#333',
+                        // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
+                        color: '#FFF', // Keep text white for good contrast
+                        loaderColor: '#1DB954', // Use Spotify green for loader
+                        sliderColor: '#1DB954', // Spotify green for the slider
+                        sliderHandleColor: '#FFF', // White slider handle for better visibility
+                        sliderTrackColor: '#555', // Darker track background for contrast
+                        trackArtistColor: '#AAA', // Subtle light gray for artist name
+                        trackNameColor: '#FFF', // White track name for visibility
+                    }} />
                 :
                 <p>No token!</p>
             }
