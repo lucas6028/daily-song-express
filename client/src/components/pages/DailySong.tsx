@@ -138,7 +138,8 @@ function DailySong() {
                 }}
                     play={play}
                     token={access_token}
-                    uris={[uri]} />
+                    uris={[uri]}
+                    initialVolume={50} />
                 :
                 <p>No token!</p>
             }
