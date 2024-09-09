@@ -14,6 +14,7 @@ export default function RedirectURL() {
     "streaming user-read-email user-read-private user-read-playback-state user-modify-playback-state user-library-read user-library-modify user-top-read"
   );
   params.append("state", state);
+  params.append("show_dialog", "true");
 
   const spotifyAuthURL = `https://accounts.spotify.com/authorize?${params.toString()}`;
   window.location.href = spotifyAuthURL;

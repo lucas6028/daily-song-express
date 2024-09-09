@@ -5,8 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Image } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import Cookies from 'js-cookie';
-import { handleLogout } from '../../auth/Logout';
+import { handleLogout } from '../../api/Logout';
 
 function NavBar() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");

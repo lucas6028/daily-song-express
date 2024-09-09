@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import RequestAccess from '../auth/RequestAccess';
 import RedirectURL from '../auth/RedirectURL';
+// import RefreshToken from '../api/RefreshToken';
 
 function Home() {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -15,6 +16,7 @@ function Home() {
                 await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
                 window.location.href = "/dashboard";
             } catch {
+                // await RefreshToken();
                 const existingCode = new URLSearchParams(window.location.search).get("code");
                 if (!existingCode) {
                     RedirectURL();
