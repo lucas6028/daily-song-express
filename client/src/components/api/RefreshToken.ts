@@ -8,7 +8,6 @@ async function RefreshToken() {
     console.log(res.data);
   } catch (err) {
     console.error("Error while refresh token: " + err);
-    // window.location.href = "/"; // redirect to login page to get the access token
   }
 }
 
