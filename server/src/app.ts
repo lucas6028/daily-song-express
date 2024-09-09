@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 app.use("/", rootRoutes);
 app.use("/login", authRoutes);
-app.use("logout", logoutRoutes);
+app.use("/logout", logoutRoutes);
 app.use("/refresh", refreshRoutes);
 app.use("/profile", profileRoutes);
 app.use("/track", trackRoutes);

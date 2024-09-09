@@ -1,8 +1,11 @@
-import NavigationButton from "./NavigationButton";
+interface LoginButtonProps {
+  onClick: () => void;
+}
 
-function LogInButton() {
+function LogInButton({ onClick }: LoginButtonProps) {
+
   return (
-    <NavigationButton to="/dashboard" className="cssbuttons-io-button">
+    <button onClick={onClick} className="cssbuttons-io-button" >
       Log in
       <div className="icon">
         <svg
@@ -18,7 +21,7 @@ function LogInButton() {
           ></path>
         </svg>
       </div>
-    </NavigationButton>
+    </button>
   );
 }
 

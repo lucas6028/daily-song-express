@@ -68,7 +68,7 @@ function NavBar() {
                             <NavDropdown.Item href="#account">Account</NavDropdown.Item>
                             <NavDropdown.Item href="#settings">Settings</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="/" onClick={() => handleLogout}>Logout</NavDropdown.Item>
+                            <NavDropdown.Item href="/" onClick={handleLogout}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
