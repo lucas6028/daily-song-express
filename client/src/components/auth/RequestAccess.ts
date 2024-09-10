@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export default function RequestAccess(urlCode: string): Promise<boolean> {
+export default async function RequestAccess(urlCode: string) {
   console.log(`server url: ${import.meta.env.VITE_SERVER_URL}/login`);
   if (!urlCode) {
     console.error("Authorization code is missing from URL");
-    return Promise.resolve(false); // Return a resolved Promise with `false`;
+    return;
   }
 
-  return axios
+  await axios
     .get(`${import.meta.env.VITE_SERVER_URL}/login`, {
       params: {
         code: urlCode,
@@ -17,7 +17,7 @@ export default function RequestAccess(urlCode: string): Promise<boolean> {
     .then((res) => {
       console.log(res.data);
 
-      window.history.pushState({}, "", "/dashboard");
+      window.history.pushState({}, "", "/login");
 
       return true;
     })

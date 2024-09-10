@@ -9,6 +9,7 @@ import artistRoutes from "./routes/artistRoutes";
 import playlistRoutes from "./routes/playlistRoutes";
 import logoutRoutes from "./routes/logoutRoutes";
 import rootRoutes from "./routes/rootRoutes";
+import checkRoutes from "./routes/checkRoutes";
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use("/profile", profileRoutes);
 app.use("/track", trackRoutes);
 app.use("/artist", artistRoutes);
 app.use("/playlist", playlistRoutes);
+app.use("/check-token", checkRoutes);
 
 export default app;

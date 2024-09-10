@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import RedirectURL from '../auth/RedirectURL';
@@ -8,27 +7,23 @@ const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
 
     const handleLoginClick = () => {
-        const fetchToken = async () => {
-            try {
-                await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
-                window.location.href = "/dashboard";
-            } catch {
-                // await RefreshToken();
-                const existingCode = new URLSearchParams(window.location.search).get("code");
-                if (!existingCode) {
-                    RedirectURL();
-                } else {
-                    setUrlCode(existingCode);
-                }
-            }
-        };
-        fetchToken();
-    }
+        RedirectURL();
+    };
+
+    useEffect(() => {
+        const existingCode = new URLSearchParams(window.location.search).get("code");
+        if (existingCode) {
+            setUrlCode(existingCode);
+        }
+    }, [])
 
     useEffect(() => {
         if (urlCode) {
             RequestAccess(urlCode)
-                .then(() => window.location.href = "/dashboard")
+                .then(() => {
+                    console.log("Login successfully! Redirect to dashboard");
+                    window.location.href = "/dashboard";
+                })
                 .catch((err) => console.error(err));
         }
     }, [urlCode]);
@@ -56,7 +51,7 @@ const Login: React.FC = () => {
                             borderRadius: '25px',
                         }}
                         onClick={handleLoginClick}
-                        href="/dashboard"
+                    // href="/dashboard"
                     >
                         <i className="bi bi-spotify" style={{ marginRight: '8px', fontSize: '24px' }}></i>
                         Sign in with Spotify

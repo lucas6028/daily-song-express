@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { ButtonGroup, Container, Row, Col } from "react-bootstrap";
-import RedirectURL from "../auth/RedirectURL";
-import RequestAccess from "../auth/RequestAccess";
 import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import NavBar from "../ui/navbar/Navbar";
@@ -9,36 +7,31 @@ import axios from "axios";
 import "../styles/Dashboard.css";
 
 export default function Dashboard() {
-    const [urlCode, setUrlCode] = useState<string | null>(null);
-    const [hasToken, setHasToken] = useState<boolean>(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        const fetchToken = async () => {
+        const checkAuth = async () => {
             try {
-                await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
-                setHasToken(true);
-            } catch (err) {
-                console.error("Error while getting token: " + err);
-                const existingCode = new URLSearchParams(window.location.search).get("code");
-                if (!existingCode) {
-                    RedirectURL();
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/check-token`, { withCredentials: true });
+
+                if (response.data.authenticated) {
+                    // User is authenticated (either access token is valid or refreshed)
+                    setIsAuthenticated(true);
                 } else {
-                    setUrlCode(existingCode);
+                    // No access token, no refresh token, or refresh failed
+                    console.log(response.data.message);
+                    window.location.href = "/login";
                 }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+                window.location.href = "/login";
             }
         };
-        fetchToken();
+
+        checkAuth();
     }, []);
 
-    useEffect(() => {
-        if (urlCode) {
-            RequestAccess(urlCode)
-                .then((res: boolean) => setHasToken(res))
-                .catch((err) => console.error(err));
-        }
-    }, [urlCode]);
-
-    if (!hasToken) {
+    if (!isAuthenticated) {
         return (
             <div className="loading-screen d-flex flex-column align-items-center">
                 <Hamster />

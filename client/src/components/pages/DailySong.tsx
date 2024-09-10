@@ -29,7 +29,6 @@ function DailySong() {
         const fetchToken = async () => {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
-                console.log(res.data);
                 setAccessToken(res.data);
             } catch (err) {
                 console.error("Error while get token: " + err);
