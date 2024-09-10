@@ -17,6 +17,7 @@ export default function Dashboard() {
                 if (response.data.authenticated) {
                     // User is authenticated (either access token is valid or refreshed)
                     setIsAuthenticated(true);
+                    console.log("Already has token!");
                 } else {
                     // No access token, no refresh token, or refresh failed
                     console.log(response.data.message);
