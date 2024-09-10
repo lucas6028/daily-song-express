@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
   });
 
   spotifyAPI.setAccessToken("");
+  console.log("Log out successfully!");
   res.send("Log out successfully!");
 });
 
