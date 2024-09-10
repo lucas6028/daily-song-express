@@ -2,8 +2,8 @@ import axios from "axios";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import './Profile.css';
 import NavBar from "../ui/navbar/Navbar";
+import "../styles/Profile.css"
 
 export default function Profile() {
     const defaultProfile = useMemo(() => ({

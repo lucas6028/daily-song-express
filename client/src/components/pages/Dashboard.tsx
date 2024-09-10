@@ -6,7 +6,7 @@ import NavigationButton from "../ui/button/NavigationButton";
 import Hamster from "../ui/hamster/Hamster";
 import NavBar from "../ui/navbar/Navbar";
 import axios from "axios";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
 
 export default function Dashboard() {
     const [urlCode, setUrlCode] = useState<string | null>(null);

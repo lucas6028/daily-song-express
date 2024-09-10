@@ -1,6 +1,6 @@
 // import LogInButton from '../ui/button/LogInButton';
 import DJImg from '../../assets/DJ.jpg';
-import './Home.css';
+import "../styles/Home.css";
 
 function Home() {
 
