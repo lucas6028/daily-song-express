@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import RedirectURL from '../auth/RedirectURL';
 import RequestAccess from '../auth/RequestAccess';
-import spotifyLogo from '/src/assets/spotify_logo_with_text.svg';
+import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
 
 const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
