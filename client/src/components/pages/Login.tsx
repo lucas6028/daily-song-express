@@ -6,10 +6,6 @@ import RequestAccess from '../auth/RequestAccess';
 const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
 
-    const handleLoginClick = () => {
-        RedirectURL();
-    };
-
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
         if (existingCode) {
@@ -41,7 +37,7 @@ const Login: React.FC = () => {
                     </Card.Title>
                     <Button
                         variant="outline-light"
-                        className="btn-block mb-3"
+                        className="btn-block mb-3 w-100"
                         style={{
                             display: 'flex',
                             alignItems: 'center',
@@ -50,8 +46,7 @@ const Login: React.FC = () => {
                             fontSize: '16px',
                             borderRadius: '25px',
                         }}
-                        onClick={handleLoginClick}
-                    // href="/dashboard"
+                        onClick={() => RedirectURL()}
                     >
                         <i className="bi bi-spotify" style={{ marginRight: '8px', fontSize: '24px' }}></i>
                         Sign in with Spotify
