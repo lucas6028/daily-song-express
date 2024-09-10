@@ -4,18 +4,18 @@ import spotifyAPI from "../config/spotifyConfig";
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.cookie("access_token", "", {
-    maxAge: 0, // Set cookie expiration to 0 to delete it
+  res.clearCookie("access_token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    path: "/", // Make sure path matches the one used during cookie creation
   });
 
-  res.cookie("refresh_token", "", {
-    maxAge: 0, // Set cookie expiration to 0 to delete it
+  res.clearCookie("refresh_token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+    path: "/", // Make sure path matches the one used during cookie creation
   });
 
   spotifyAPI.setAccessToken("");
