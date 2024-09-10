@@ -33,8 +33,8 @@ router.get("/", async (req, res) => {
     res.cookie("refresh_token", refreshToken, {
       maxAge: expiresIn * 1000 * 30,
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+      // secure: process.env.NODE_ENV === "production",
+      // sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
     });
     res.send("Cookie set: access_token, refresh_token");
 
