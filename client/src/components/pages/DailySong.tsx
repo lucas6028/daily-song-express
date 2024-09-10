@@ -109,6 +109,7 @@ function DailySong() {
     return (
         <>
             <NavBar />
+            <br />
             <Container className="my-1">
                 <Carousel>
                     {searchResults.map((track) => (
@@ -120,7 +121,6 @@ function DailySong() {
                                         <Card.Body className="d-flex flex-column align-items-center">
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
-                                            {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
                                             <PlayButton onClick={() => handleCardClick(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
@@ -130,6 +130,7 @@ function DailySong() {
                     ))}
                 </Carousel>
             </Container>
+            <br />
             {access_token ?
                 <SpotifyWebPlayer callback={(state) => {
                     if (!state.isPlaying) {
@@ -144,7 +145,8 @@ function DailySong() {
                     styles={{
                         height: 50,
                         activeColor: '#1DB954', // Bright Spotify green for active elements
-                        bgColor: '#333',
+                        bgColor: 'transparent',
+                        // bgColor: '#333',
                         // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
                         color: '#FFF', // Keep text white for good contrast
                         loaderColor: '#1DB954', // Use Spotify green for loader
