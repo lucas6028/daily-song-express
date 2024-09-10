@@ -10,7 +10,6 @@ router.get("/", async (req, res) => {
 
   if (accessToken) {
     // Access token exists, assume it's valid
-    console.log("Already has token");
     return res
       .status(200)
       .json({ authenticated: true, message: "Access token is present" });
@@ -31,7 +30,6 @@ router.get("/", async (req, res) => {
         sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       });
 
-      console.log("Refreshed token");
       return res
         .status(200)
         .json({ authenticated: true, message: "Access token refreshed" });

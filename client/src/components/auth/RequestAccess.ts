@@ -18,8 +18,6 @@ export default async function RequestAccess(urlCode: string) {
       console.log(res.data);
 
       window.history.pushState({}, "", "/login");
-
-      return true;
     })
     .catch((err) => {
       console.error("Error posting code:", err);
