@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import RedirectURL from '../auth/RedirectURL';
 import RequestAccess from '../auth/RequestAccess';
+import spotifyLogo from '/src/assets/spotify_logo_with_text.svg';
 
 const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
@@ -30,7 +31,7 @@ const Login: React.FC = () => {
                 <Card.Body>
                     <Card.Title className="mb-4">
                         <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg"
+                            src={spotifyLogo}
                             alt="Spotify Logo"
                             style={{ width: '150px' }}
                         />
