@@ -21,8 +21,5 @@ export default async function RequestAccess(urlCode: string) {
     })
     .catch((err) => {
       console.error("Error posting code:", err);
-      // window.location.href = "/";
-
-      return false;
     });
 }

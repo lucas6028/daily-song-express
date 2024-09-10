@@ -3,9 +3,11 @@ import { Card, Button } from 'react-bootstrap';
 import RedirectURL from '../auth/RedirectURL';
 import RequestAccess from '../auth/RequestAccess';
 import spotifyLogo from '../../assets/Spotify_logo_with_text.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [urlCode, setUrlCode] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const existingCode = new URLSearchParams(window.location.search).get("code");
@@ -19,7 +21,7 @@ const Login: React.FC = () => {
             RequestAccess(urlCode)
                 .then(() => {
                     console.log("Login successfully! Redirect to dashboard");
-                    window.location.href = "/dashboard";
+                    navigate("/dashboard");
                 })
                 .catch((err) => console.error(err));
         }

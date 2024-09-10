@@ -5,9 +5,11 @@ import Hamster from "../ui/hamster/Hamster";
 import NavBar from "../ui/navbar/Navbar";
 import axios from "axios";
 import "../styles/Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -20,11 +22,11 @@ export default function Dashboard() {
                 } else {
                     // No access token, no refresh token, or refresh failed
                     console.log(response.data.message);
-                    window.location.href = "/login";
+                    navigate("/login");
                 }
             } catch (error) {
                 console.error("Error checking auth status:", error);
-                window.location.href = "/login";
+                navigate("/login");
             }
         };
 
