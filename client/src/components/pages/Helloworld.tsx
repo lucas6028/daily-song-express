@@ -1,54 +1,79 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Fade, Zoom, Slide } from 'react-awesome-reveal';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HelloWorld: React.FC = () => {
     return (
-        <Container fluid className="bg-dark text-light min-vh-100 d-flex flex-column justify-content-center">
-            <Row className="text-center mb-5">
-                <Col>
-                    <h1 className="display-2 fw-bold mb-4">Discover Your Sound</h1>
-                    <p className="lead">Explore your top tracks and get personalized recommendations</p>
-                </Col>
-            </Row>
+        <div style={styles.container}>
+            <Fade triggerOnce>
+                <h1 style={styles.heading}>Welcome to Your Spotify Experience</h1>
+            </Fade>
 
-            <Row className="text-center mb-5">
-                <Col md={4} className="mb-4 mb-md-0">
-                    <div className="icon-wrapper text-primary mb-3">
-                        <i className="bi bi-music-note-beamed" style={{ fontSize: '2rem' }}></i>
-                    </div>
-                    <h3>Your Top Tracks</h3>
-                    <p>See what you've been listening to most</p>
-                </Col>
-                <Col md={4} className="mb-4 mb-md-0">
-                    <div className="icon-wrapper text-success mb-3">
-                        <i className="bi bi-headphones" style={{ fontSize: '2rem' }}></i>
-                    </div>
-                    <h3>Recommended Tracks</h3>
-                    <p>Discover new music based on your taste</p>
-                </Col>
-                <Col md={4}>
-                    <div className="icon-wrapper text-danger mb-3">
-                        <i className="bi bi-spotify" style={{ fontSize: '2rem' }}></i>
-                    </div>
-                    <h3>Spotify Integration</h3>
-                    <p>Seamlessly connect with your Spotify account</p>
-                </Col>
-            </Row>
+            {/* Adding an inline image */}
+            <Zoom triggerOnce>
+                <img
+                    src="https://store-images.s-microsoft.com/image/apps.10546.13571498826857201.6603a5e2-631f-4f29-9b08-f96589723808.dc893fe0-ecbc-4846-9ac6-b13886604095" // Replace with your image URL
+                    alt="Spotify experience"
+                    style={styles.image}
+                />
+            </Zoom>
 
-            <Row className="text-center">
-                <Col>
-                    <Button
-                        variant="success"
-                        size="lg"
-                        href="/dashboard"
-                        className="px-5 py-3 fw-bold"
-                    >
-                        Go to Dashboard
-                    </Button>
-                </Col>
-            </Row>
-        </Container>
+            <Zoom triggerOnce>
+                <p style={styles.text}>
+                    Discover your favorite tracks, explore new recommendations, and more!
+                </p>
+            </Zoom>
+
+            <Slide direction="up" triggerOnce>
+                <Button
+                    href="/dashboard"
+                    variant="success"
+                    size="lg"
+                    style={styles.button}
+                >
+                    Go to Dashboard
+                </Button>
+            </Slide>
+        </div>
     );
+};
+
+const styles: { [key: string]: React.CSSProperties } = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh', // Full height of the viewport
+        width: '100vw',  // Full width of the viewport
+        backgroundImage: 'url("https://dimg.wavevisual.com/v3/von-sample-2.png?width=3840")', // Background image URL
+        backgroundSize: 'cover',   // Ensures the background image covers the entire screen
+        backgroundPosition: 'center', // Centers the background image
+        backgroundRepeat: 'no-repeat', // No repeating of the image
+        margin: 0,
+        padding: 0,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    heading: {
+        fontSize: '3rem',
+        marginBottom: '20px',
+        color: '#000',
+    },
+    text: {
+        fontSize: '1.5rem',
+        marginBottom: '40px',
+        color: '#000',
+    },
+    button: {
+        fontSize: '1.2rem',
+    },
+    image: {
+        width: '150px', // Adjust size as needed
+        marginBottom: '30px',
+        background: 'transparent',
+    },
 };
 
 export default HelloWorld;
