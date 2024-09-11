@@ -129,7 +129,6 @@ function DailySong() {
                     ))}
                 </Carousel>
             </Container>
-            <br />
             {access_token ?
                 <SpotifyWebPlayer callback={(state) => {
                     if (!state.isPlaying) {
