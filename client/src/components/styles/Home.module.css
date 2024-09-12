@@ -6,7 +6,8 @@
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-image: url("https://dimg.wavevisual.com/v3/von-sample-2.png?width=3840");
+  /* background-image: url("https://www.wallpaperflare.com/static/1019/523/600/audio-spectrum-blue-sound-wave-wallpaper.jpg"); */
+  background-image: url("https://i.pinimg.com/originals/a5/22/fc/a522fc07c82ba52661fc4877a310ced7.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,13 +20,13 @@
 .heading {
   font-size: 3rem;
   margin-bottom: 20px;
-  color: #000;
+  color: #fff;
 }
 
 .text {
   font-size: 1.5rem;
   margin-bottom: 40px;
-  color: #000;
+  color: #fff;
 }
 
 .button {

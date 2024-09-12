@@ -1,10 +1,8 @@
-// import LogInButton from '../ui/button/LogInButton';
-// import "../styles/Home.css";
-import React from 'react';
 import { Fade, Zoom, Slide } from 'react-awesome-reveal';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
+// import spotifySvg from '/spotify5.svg';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -17,7 +15,8 @@ const Home: React.FC = () => {
             {/* Adding an inline image */}
             <Zoom triggerOnce>
                 <img
-                    src="https://store-images.s-microsoft.com/image/apps.10546.13571498826857201.6603a5e2-631f-4f29-9b08-f96589723808.dc893fe0-ecbc-4846-9ac6-b13886604095" // Replace with your image URL
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/768px-Spotify_icon.svg.png?202208211253235"
+                    // src={spotifySvg}
                     alt="Spotify experience"
                     className={styles.image}
                 />

@@ -47,7 +47,7 @@ const styles: { [key: string]: React.CSSProperties } = {
         justifyContent: 'center',
         height: '100vh', // Full height of the viewport
         width: '100vw',  // Full width of the viewport
-        backgroundImage: 'url("https://dimg.wavevisual.com/v3/von-sample-2.png?width=3840")', // Background image URL
+        backgroundImage: 'url("https://www.wallpaperflare.com/static/1019/523/600/audio-spectrum-blue-sound-wave-wallpaper.jpg")', // Background image URL
         backgroundSize: 'cover',   // Ensures the background image covers the entire screen
         backgroundPosition: 'center', // Centers the background image
         backgroundRepeat: 'no-repeat', // No repeating of the image
