@@ -8,7 +8,7 @@ function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [access_token, setAccessToken] = useState<string | null>(null);
     const [play, setPlay] = useState<boolean>(false);
-    const [uri, setUri] = useState<string>("");
+    const [uri, setUri] = useState<string>("spotify:track:19D8LNpWwIPpi6hs9BG7dq");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -54,35 +54,37 @@ function Challenges() {
     return (
         <>
             <h1>Challenge</h1>
-            {access_token ?
-                <SpotifyWebPlayer callback={(state) => {
-                    if (!state.isPlaying) {
-                        setPlay(false);
-                    }
-                }}
-                    showSaveIcon
-                    play={play}
-                    token={access_token}
-                    uris={[uri]}
-                    initialVolume={50}
-                    styles={{
-                        height: 50,
-                        activeColor: '#1DB954', // Bright Spotify green for active elements
-                        bgColor: 'transparent',
-                        // bgColor: '#333',
-                        // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
-                        color: '#FFF', // Keep text white for good contrast
-                        loaderColor: '#1DB954', // Use Spotify green for loader
-                        sliderColor: '#1DB954', // Spotify green for the slider
-                        sliderHandleColor: '#FFF', // White slider handle for better visibility
-                        sliderTrackColor: '#555', // Darker track background for contrast
-                        sliderHeight: 7,
-                        trackArtistColor: '#AAA', // Subtle light gray for artist name
-                        trackNameColor: '#FFF', // White track name for visibility
-                    }} />
-                :
-                <p>No token</p>
-            }
+            <div style={{ visibility: "hidden" }}>
+                {access_token ?
+                    <SpotifyWebPlayer callback={(state) => {
+                        if (!state.isPlaying) {
+                            setPlay(false);
+                        }
+                    }}
+                        showSaveIcon
+                        play={play}
+                        token={access_token}
+                        uris={[uri]}
+                        initialVolume={50}
+                        styles={{
+                            height: 50,
+                            activeColor: '#1DB954', // Bright Spotify green for active elements
+                            bgColor: 'transparent',
+                            // bgColor: '#333',
+                            // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
+                            color: '#FFF', // Keep text white for good contrast
+                            loaderColor: 'transparent', // Use Spotify green for loader
+                            sliderColor: 'transparent', // Spotify green for the slider
+                            sliderHandleColor: 'transparent', // White slider handle for better visibility
+                            sliderTrackColor: '#transparent', // Darker track background for contrast
+                            sliderHeight: 7,
+                            trackArtistColor: 'transparent', // Subtle light gray for artist name
+                            trackNameColor: 'transparent', // White track name for visibility
+                        }} />
+                    :
+                    <p>No token</p>
+                }
+            </ div>
         </>
     )
 }
