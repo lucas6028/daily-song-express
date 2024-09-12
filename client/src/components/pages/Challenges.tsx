@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
+import spotifyPlayerStyles from "../styles/style";
 
 function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -66,21 +67,7 @@ function Challenges() {
                         token={access_token}
                         uris={[uri]}
                         initialVolume={50}
-                        styles={{
-                            height: 50,
-                            activeColor: '#1DB954', // Bright Spotify green for active elements
-                            bgColor: 'transparent',
-                            // bgColor: '#333',
-                            // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
-                            color: '#FFF', // Keep text white for good contrast
-                            loaderColor: 'transparent', // Use Spotify green for loader
-                            sliderColor: 'transparent', // Spotify green for the slider
-                            sliderHandleColor: 'transparent', // White slider handle for better visibility
-                            sliderTrackColor: '#transparent', // Darker track background for contrast
-                            sliderHeight: 7,
-                            trackArtistColor: 'transparent', // Subtle light gray for artist name
-                            trackNameColor: 'transparent', // White track name for visibility
-                        }} />
+                        styles={spotifyPlayerStyles} />
                     :
                     <p>No token</p>
                 }
