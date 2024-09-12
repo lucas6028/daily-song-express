@@ -18,7 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
           <Route path="/helloworld" element={<Helloworld></Helloworld>}></Route>
           <Route path="/topTracks" element={<TopTracks></TopTracks>}></Route>
-          <Route path="/challenges" element={<Challenges></Challenges>}></Route>
+          <Route path="/challenge" element={<Challenges></Challenges>}></Route>
           <Route path="/daily" element={<DailySong></DailySong>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
           <Route path="/login" element={<Login />}></Route>
