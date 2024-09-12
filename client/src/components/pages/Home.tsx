@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
 // import spotifySvg from '/spotify5.svg';
-import brand from "/brand_text-removebg-preview.png";
+import brand from "/brand_text.png";
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -17,6 +17,17 @@ const Home: React.FC = () => {
                     className={styles.image}
                 />
             </Zoom>
+            <Slide direction="up" triggerOnce>
+                <Button
+                    href="/dashboard"
+                    variant="success"
+                    size="lg"
+                    // className={styles.button}
+                    onClick={() => navigate("/dashboard")}
+                >
+                    Go to Dashboard
+                </Button>
+            </Slide>
             <Fade triggerOnce>
                 <h1 className={styles.heading}>Welcome to Your Spotify Experience</h1>
             </Fade>
@@ -29,17 +40,6 @@ const Home: React.FC = () => {
                 </p>
             </Zoom>
 
-            <Slide direction="up" triggerOnce>
-                <Button
-                    href="/dashboard"
-                    variant="success"
-                    size="lg"
-                    // className={styles.button}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    Go to Dashboard
-                </Button>
-            </Slide>
         </div>
     );
 };
