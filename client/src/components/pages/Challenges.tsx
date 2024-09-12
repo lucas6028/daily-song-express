@@ -9,7 +9,8 @@ function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [access_token, setAccessToken] = useState<string | null>(null);
     const [play, setPlay] = useState<boolean>(false);
-    const [uri, setUri] = useState<string>("spotify:track:19D8LNpWwIPpi6hs9BG7dq");
+    // const [uri, setUri] = useState<string>("spotify:track:19D8LNpWwIPpi6hs9BG7dq");
+    const uri = "spotify:track:19D8LNpWwIPpi6hs9BG7dq";
     const navigate = useNavigate();
 
     useEffect(() => {

@@ -113,7 +113,6 @@ function TopTrack() {
                                         <Card.Body className="d-flex flex-column align-items-center">
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
-                                            {/* <Button onClick={() => handleCardCLick(track.trackUri)} className="btn btn-primary">Play</Button> */}
                                             <PlayButton onClick={() => handleCardClick(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
