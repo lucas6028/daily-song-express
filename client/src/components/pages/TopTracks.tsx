@@ -135,7 +135,8 @@ function TopTrack() {
                     styles={{
                         height: 50,
                         activeColor: '#1DB954', // Bright Spotify green for active elements
-                        bgColor: '#333',
+                        bgColor: 'transparent',
+                        // bgColor: '#333',
                         // bgColor: 'linear-gradient(135deg, #333, #444)', // Gradient for background to add depth
                         color: '#FFF', // Keep text white for good contrast
                         loaderColor: '#1DB954', // Use Spotify green for loader
