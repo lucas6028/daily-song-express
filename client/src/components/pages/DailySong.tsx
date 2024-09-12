@@ -40,6 +40,7 @@ function DailySong() {
         };
 
         checkAuth();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -118,7 +119,7 @@ function DailySong() {
         };
 
         fetchRecommendTracks();
-    }, [artists]); // Include artists in the dependency array
+    }, [artists]);
 
     if (!isAuthenticated || loading) {
         return <Loading />;

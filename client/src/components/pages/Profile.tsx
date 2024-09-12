@@ -40,6 +40,7 @@ export default function Profile() {
         };
 
         checkAuth();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchProfile = useCallback(async () => {
