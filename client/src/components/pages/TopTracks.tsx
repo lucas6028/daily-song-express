@@ -6,6 +6,7 @@ import { SpotifyItemsResponse, Track } from "../types";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import PlayButton from "../ui/button/PlayButton";
 import NavBar from "../ui/navbar/Navbar";
+import { useNavigate } from "react-router-dom";
 
 function TopTrack() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -14,6 +15,30 @@ function TopTrack() {
     const [uri, setUri] = useState<string>("");
     const [play, setPlay] = useState<boolean>(false);
     const [access_token, setAccessToken] = useState<string | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/check-token`, { withCredentials: true });
+
+                if (response.data.authenticated) {
+                    // User is authenticated (either access token is valid or refreshed)
+                    setIsAuthenticated(true);
+                } else {
+                    // No access token, no refresh token, or refresh failed
+                    console.log(response.data.message);
+                    navigate("/login");
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+                navigate("/login");
+            }
+        };
+
+        checkAuth();
+    }, []);
 
     const handleCardClick = (newUri: string) => {
         setUri(newUri);
@@ -63,7 +88,7 @@ function TopTrack() {
         fetchTopTracks();
     }, []);
 
-    if (loading) {
+    if (!isAuthenticated || loading) {
         return <Loading></Loading>;
     }
 

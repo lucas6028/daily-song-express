@@ -6,6 +6,7 @@ import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from '../ui/button/PlayButton';
 import NavBar from '../ui/navbar/Navbar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function DailySong() {
     const [searchResults, setSearchResults] = useState<Track[]>([]);
@@ -16,6 +17,30 @@ function DailySong() {
     const [artists, setArtists] = useState<Artist[]>([]);
     const [access_token, setAccessToken] = useState<string | null>(null);
     const minPopularity = 10;
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/check-token`, { withCredentials: true });
+
+                if (response.data.authenticated) {
+                    // User is authenticated (either access token is valid or refreshed)
+                    setIsAuthenticated(true);
+                } else {
+                    // No access token, no refresh token, or refresh failed
+                    console.log(response.data.message);
+                    navigate("/login");
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+                navigate("/login");
+            }
+        };
+
+        checkAuth();
+    }, []);
 
     const handleCardClick = (newUri: string) => {
         setUri(newUri);
@@ -99,7 +124,7 @@ function DailySong() {
         fetchRecommendTracks();
     }, [artists]); // Include artists in the dependency array
 
-    if (loading) {
+    if (!isAuthenticated || loading) {
         return <Loading />;
     }
     if (error) {

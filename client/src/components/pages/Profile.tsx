@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import NavBar from "../ui/navbar/Navbar";
 import "../styles/Profile.css"
+import { useNavigate } from "react-router-dom";
+import Loading from "../ui/loading/Loading";
 
 export default function Profile() {
     const defaultProfile = useMemo(() => ({
@@ -14,8 +16,31 @@ export default function Profile() {
         followers: 0,
         spotifyUrl: "N/A",
     }), []);
-
     const [profile, setProfile] = useState(defaultProfile);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/check-token`, { withCredentials: true });
+
+                if (response.data.authenticated) {
+                    // User is authenticated (either access token is valid or refreshed)
+                    setIsAuthenticated(true);
+                } else {
+                    // No access token, no refresh token, or refresh failed
+                    console.log(response.data.message);
+                    navigate("/login");
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+                navigate("/login");
+            }
+        };
+
+        checkAuth();
+    }, []);
 
     const fetchProfile = useCallback(async () => {
         try {
@@ -39,6 +64,11 @@ export default function Profile() {
         fetchProfile();
     }, [fetchProfile,]);
 
+    if (!isAuthenticated) {
+        return (
+            <Loading />
+        )
+    }
     return (
         <>
             <NavBar />
