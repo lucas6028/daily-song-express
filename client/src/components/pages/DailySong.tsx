@@ -42,10 +42,6 @@ function DailySong() {
         checkAuth();
     }, []);
 
-    const handleCardClick = (newUri: string) => {
-        setUri(newUri);
-    }
-
     useEffect(() => {
         setPlay(true);
     }, [uri])
@@ -145,7 +141,7 @@ function DailySong() {
                                         <Card.Body className="d-flex flex-column align-items-center">
                                             <Card.Title>{track.title}</Card.Title>
                                             <Card.Text>{track.artist}</Card.Text>
-                                            <PlayButton onClick={() => handleCardClick(track.trackUri)} />
+                                            <PlayButton onClick={() => setUri(track.trackUri)} />
                                         </Card.Body>
                                     </Card>
                                 </Col>
