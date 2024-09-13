@@ -11,7 +11,7 @@ import styles from "../styles/TopTracks.module.css";
 import spotifyPlayerStyles from "../styles/style";
 
 function TopTrack() {
-    const [searchResults, setSearchResults] = useState<Track[]>([]);
+    const [tracks, setTracks] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [uri, setUri] = useState<string>("");
@@ -55,7 +55,6 @@ function TopTrack() {
         const fetchToken = async () => {
             try {
                 const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/login/token`, { withCredentials: true });
-                console.log(res.data);
                 setAccessToken(res.data);
             } catch (err) {
                 console.error("Error while get token: " + err);
@@ -68,7 +67,7 @@ function TopTrack() {
                 }, {
                     withCredentials: true
                 });
-                const tracks = res.data.body.items.map((track) => ({
+                const newTracks = res.data.body.items.map((track) => ({
                     albumName: track.album.name,
                     albumUri: track.album.uri,
                     img: track.album.images[1].url,
@@ -78,7 +77,7 @@ function TopTrack() {
                     id: track.id,
                     trackUri: track.uri,
                 }));
-                setSearchResults(tracks);
+                setTracks(newTracks);
             } catch (err) {
                 console.error(err);
                 setError("Failed to fetch top tracks.");
@@ -104,7 +103,7 @@ function TopTrack() {
             <NavBar />
             <Container className="my-1">
                 <Carousel>
-                    {searchResults.map((track) => (
+                    {tracks.map((track) => (
                         <Carousel.Item key={track.id}>
                             <Row className="justify-content-center">
                                 <Col xs={10} sm={8} md={6} lg={4}>

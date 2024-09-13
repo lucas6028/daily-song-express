@@ -11,7 +11,7 @@ import styles from "../styles/DailySong.module.css";
 import spotifyPlayerStyles from '../styles/style';
 
 function DailySong() {
-    const [searchResults, setSearchResults] = useState<Track[]>([]);
+    const [tracks, setTracks] = useState<Track[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [uri, setUri] = useState<string>("");
@@ -64,7 +64,7 @@ function DailySong() {
                     limit: 1,
                     offset: Math.floor(Math.random() * 21),
                 }, { withCredentials: true });
-                // console.log(res);
+
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
                     id: art.id,
@@ -99,8 +99,7 @@ function DailySong() {
                     },
                     { withCredentials: true }
                 );
-                console.log(res);
-                const tracks: Track[] = res.data.body.tracks.map((track) => ({
+                const newTracks: Track[] = res.data.body.tracks.map((track) => ({
                     albumName: track.album.name,
                     albumUri: track.album.uri,
                     artist: track.artists[0].name,
@@ -111,7 +110,7 @@ function DailySong() {
                     img: track.album.images[1].url,
                 }));
 
-                setSearchResults(tracks);
+                setTracks(newTracks);
             } catch (err) {
                 console.error(err);
                 setError('Failed to fetch recommended tracks');
@@ -134,7 +133,7 @@ function DailySong() {
             <NavBar />
             <Container className="my-1">
                 <Carousel>
-                    {searchResults.map((track) => (
+                    {tracks.map((track) => (
                         <Carousel.Item key={track.id}>
                             <Row className="justify-content-center">
                                 <Col xs={12} md={6} lg={4}>

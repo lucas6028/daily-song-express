@@ -94,10 +94,10 @@ function Challenges() {
                     `${import.meta.env.VITE_SERVER_URL}/artist/topTracks`,
                     {
                         id: artists[0].id,
+                        market: "TW",
                     },
                     { withCredentials: true }
                 );
-                console.log(res);
                 const newTracks: Track[] = res.data.body.tracks.map((track) => ({
                     albumName: track.album.name,
                     albumUri: track.album.uri,
