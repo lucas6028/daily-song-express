@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Card } from "react-bootstrap";
 import axios from 'axios';
 import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import spotifyPlayerStyles from "../styles/style";
+import PlayButton from "../ui/button/PlayButton";
+import styles from "../styles/Challenge.module.css";
 
 function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [access_token, setAccessToken] = useState<string | null>(null);
     const [play, setPlay] = useState<boolean>(false);
-    // const [uri, setUri] = useState<string>("spotify:track:19D8LNpWwIPpi6hs9BG7dq");
-    const uri = "spotify:track:19D8LNpWwIPpi6hs9BG7dq";
+    const [uri, setUri] = useState<string>("");
+    const [isVisible, setIsVisible] = useState<boolean>(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setPlay(true);
+    }, [uri]);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -56,7 +63,19 @@ function Challenges() {
     return (
         <>
             <h1>Challenge</h1>
-            <div style={{ visibility: "hidden" }}>
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Body>
+                    <Card.Title>Card Title</Card.Title>
+                    <Card.Text>
+                        Some quick example text to build on the card title and make up the
+                        bulk of the card's content.
+                    </Card.Text>
+                    <PlayButton onClick={() => { setUri("spotify:track:19D8LNpWwIPpi6hs9BG7dq") }} />
+                </Card.Body>
+            </Card>
+            <Button className="primary" onClick={() => setIsVisible(!isVisible)}>Show</Button>
+            <div className={isVisible ? styles.visible : styles.hidden}>
                 {access_token ?
                     <SpotifyWebPlayer callback={(state) => {
                         if (!state.isPlaying) {

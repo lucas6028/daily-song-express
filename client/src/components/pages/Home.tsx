@@ -2,7 +2,6 @@ import { Fade, Zoom, Slide } from 'react-awesome-reveal';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
-// import spotifySvg from '/spotify5.svg';
 import brand from "/brand_text.png";
 
 const Home: React.FC = () => {
@@ -39,7 +38,6 @@ const Home: React.FC = () => {
                     Discover your favorite tracks, explore new recommendations, and more!
                 </p>
             </Zoom>
-
         </div>
     );
 };

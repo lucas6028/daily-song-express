@@ -19,6 +19,7 @@
     "react-awesome-reveal": "^4.2.14",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
+    "react-parallax": "^3.5.1",
     "react-router-dom": "^6.26.0",
     "react-spotify-web-playback": "^0.14.4",
     "react-swipeable": "^7.0.1"

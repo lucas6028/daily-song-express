@@ -1,79 +1,12 @@
-import React from 'react';
-import { Fade, Zoom, Slide } from 'react-awesome-reveal';
-import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Background, Parallax } from 'react-parallax';
+// import img from "../../assets/spotify_logo_with_text.svg";
 
-const HelloWorld: React.FC = () => {
+export default function HelloWorld() {
     return (
-        <div style={styles.container}>
-            <Fade triggerOnce>
-                <h1 style={styles.heading}>Welcome to Your Spotify Experience</h1>
-            </Fade>
-
-            {/* Adding an inline image */}
-            <Zoom triggerOnce>
-                <img
-                    src="https://store-images.s-microsoft.com/image/apps.10546.13571498826857201.6603a5e2-631f-4f29-9b08-f96589723808.dc893fe0-ecbc-4846-9ac6-b13886604095" // Replace with your image URL
-                    alt="Spotify experience"
-                    style={styles.image}
-                />
-            </Zoom>
-
-            <Zoom triggerOnce>
-                <p style={styles.text}>
-                    Discover your favorite tracks, explore new recommendations, and more!
-                </p>
-            </Zoom>
-
-            <Slide direction="up" triggerOnce>
-                <Button
-                    href="/dashboard"
-                    variant="success"
-                    size="lg"
-                    style={styles.button}
-                >
-                    Go to Dashboard
-                </Button>
-            </Slide>
-        </div>
+        <Parallax strength={1000000}>
+            <Background className="custom-bg">
+                <img src="https://i.pinimg.com/originals/a5/22/fc/a522fc07c82ba52661fc4877a310ced7.jpg" alt="fill murray" />
+            </Background>
+        </Parallax>
     );
 };
-
-const styles: { [key: string]: React.CSSProperties } = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh', // Full height of the viewport
-        width: '100vw',  // Full width of the viewport
-        backgroundImage: 'url("https://www.wallpaperflare.com/static/1019/523/600/audio-spectrum-blue-sound-wave-wallpaper.jpg")', // Background image URL
-        backgroundSize: 'cover',   // Ensures the background image covers the entire screen
-        backgroundPosition: 'center', // Centers the background image
-        backgroundRepeat: 'no-repeat', // No repeating of the image
-        margin: 0,
-        padding: 0,
-        color: '#fff',
-        textAlign: 'center',
-    },
-    heading: {
-        fontSize: '3rem',
-        marginBottom: '20px',
-        color: '#000',
-    },
-    text: {
-        fontSize: '1.5rem',
-        marginBottom: '40px',
-        color: '#000',
-    },
-    button: {
-        fontSize: '1.2rem',
-    },
-    image: {
-        width: '150px', // Adjust size as needed
-        marginBottom: '30px',
-        background: 'transparent',
-    },
-};
-
-export default HelloWorld;

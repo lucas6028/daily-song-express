@@ -1,0 +1,11 @@
+.hidden {
+  visibility: hidden; /* Hidden but space remains in layout */
+  opacity: 0; /* Makes it invisible */
+  transition: opacity 0.5s ease;
+}
+
+.visible {
+  visibility: visible; /* Visible */
+  opacity: 1; /* Full opacity */
+  transition: opacity 0.5s ease; /* Smooth transition */
+}
