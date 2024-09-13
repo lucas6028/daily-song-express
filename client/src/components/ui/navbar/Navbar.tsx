@@ -1,11 +1,7 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Image } from 'react-bootstrap';
-import axios from 'axios';
+import { Image, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { handleLogout } from '../../api/Logout';
+import axios from 'axios';
 
 function NavBar() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");

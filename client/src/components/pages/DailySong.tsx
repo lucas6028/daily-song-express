@@ -1,12 +1,12 @@
 import { Carousel, Card, Container, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from '../types';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../ui/loading/Loading';
 import SpotifyWebPlayer from 'react-spotify-web-playback';
 import PlayButton from '../ui/button/PlayButton';
 import NavBar from '../ui/navbar/Navbar';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import styles from "../styles/DailySong.module.css";
 import spotifyPlayerStyles from '../styles/style';
 

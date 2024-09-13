@@ -1,12 +1,12 @@
-import axios from "axios";
 import { Carousel, Container, Card, Row, Col } from 'react-bootstrap';
 import { useEffect, useState } from "react";
-import Loading from "../ui/loading/Loading";
 import { SpotifyItemsResponse, Track } from "../types";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
 import PlayButton from "../ui/button/PlayButton";
 import NavBar from "../ui/navbar/Navbar";
-import { useNavigate } from "react-router-dom";
 import styles from "../styles/TopTracks.module.css";
 import spotifyPlayerStyles from "../styles/style";
 
