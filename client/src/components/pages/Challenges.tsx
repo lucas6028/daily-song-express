@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from 'axios';
 import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
@@ -14,6 +14,8 @@ function Challenges() {
     const [play, setPlay] = useState<boolean>(false);
     const [uri, setUri] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [guessTrack, setGuessTrack] = useState("test");
+    const [guessSinger, setGuessSinger] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -55,6 +57,22 @@ function Challenges() {
         fetchToken();
     }, []);
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log(guessTrack);
+        console.log(guessSinger);
+    }
+
+    const handleTrackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setGuessTrack(value);
+    }
+
+    const handleSingerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setGuessSinger(value);
+    }
+
     if (!isAuthenticated) {
         return (
             <Loading />
@@ -63,17 +81,27 @@ function Challenges() {
     return (
         <>
             <h1>Challenge</h1>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </Card.Text>
-                    <PlayButton onClick={() => { setUri("spotify:track:19D8LNpWwIPpi6hs9BG7dq") }} />
-                </Card.Body>
-            </Card>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Track</Form.Label>
+                    <Form.Control placeholder="Enter track name" onChange={handleTrackChange} />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Singer</Form.Label>
+                    <Form.Control placeholder="Enter Singer name" onChange={handleSingerChange} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check type="checkbox" label="Check me out" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+            <PlayButton onClick={() => { setUri("spotify:track:19D8LNpWwIPpi6hs9BG7dq") }} />
             <Button className="primary" onClick={() => setIsVisible(!isVisible)}>Show</Button>
             <div className={isVisible ? styles.visible : styles.hidden}>
                 {access_token ?
