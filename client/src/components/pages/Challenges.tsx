@@ -15,12 +15,11 @@ function Challenges() {
     const [play, setPlay] = useState<boolean>(false);
     const [uri, setUri] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [guessTrack, setGuessTrack] = useState("");
-    // const [guessSinger, setGuessSinger] = useState("");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [artists, setArtists] = useState<Artist[]>([]);
     const [tracks, setTracks] = useState<Track[]>([]);
+    const [selectedTrack, setSelectedTrack] = useState<string>("");
     const [selectedSinger, setSelectedSinger] = useState<string>("");
     const navigate = useNavigate();
 
@@ -129,15 +128,15 @@ function Challenges() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(guessTrack);
+        console.log(selectedTrack);
         console.log(selectedSinger);
         console.log(tracks[0].title);
-        console.log(tracks[1].artist);
+        console.log(tracks[0].artist);
     }
 
-    const handleTrackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTrackChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
-        setGuessTrack(value);
+        setSelectedTrack(value);
     }
 
     const handleSingerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -161,17 +160,19 @@ function Challenges() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Track</Form.Label>
-                    <Form.Control placeholder="Enter track name" onChange={handleTrackChange} />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Select value={selectedTrack} onChange={handleTrackChange}>
+                        <option value="" disabled hidden>Select and option...</option>
+                        <option value={tracks[0].title}>{tracks[0].title}</option>
+                        <option value="b">b</option>
+                        <option value="c">c</option>
+                    </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formSelect">
                     <Form.Label>Singer</Form.Label>
                     <Form.Select value={selectedSinger} onChange={handleSingerChange}>
                         <option value="" disabled hidden>Select and option...</option>
-                        <option value="a">a</option>
+                        <option value={tracks[0].artist}>{tracks[0].artist}</option>
                         <option value="b">b</option>
                         <option value="c">c</option>
                     </Form.Select>
