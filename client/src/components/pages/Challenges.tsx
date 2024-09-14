@@ -23,6 +23,7 @@ function Challenges() {
     const [selectedTrack, setSelectedTrack] = useState<string>("");
     const [selectedArtists, setSelectedArtists] = useState<string>("");
     const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
+    const [isFlipped, setIsFlipped] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -153,18 +154,18 @@ function Challenges() {
         const trimTrackName = trimName(tracks[0].title);
         const trimSelectedTrackName = trimName(selectedTrack);
         if (compareNames(trimTrackName, trimSelectedTrackName)) {
+            if (tracks[0].artist === selectedArtists) {
+                console.log("Flip card!");
+                setIsFlipped(true);
+            }
+            else {
+                console.log("The artist name is wrong...");
+            }
+        }
+        else {
             console.log("The track name is correct!");
         }
-        else {
-            console.log("The track name is wrong...");
-        }
 
-        if (tracks[0].artist === selectedArtists) {
-            console.log("The artist name is correct!");
-        }
-        else {
-            console.log("The artist name is wrong...");
-        }
         console.log(selectedTrack);
         console.log(selectedArtists);
         console.log(tracks[0].title);
@@ -194,35 +195,51 @@ function Challenges() {
     return (
         <>
             <NavBar />
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Song</Form.Label>
-                    <Form.Control
-                        placeholder="Enter the name of the song..."
-                        onChange={handleTrackChange}
-                        value={selectedTrack}
-                    >
-                    </Form.Control>
-                </Form.Group>
+            <div className={`bg-secondary ${styles.cardContainer} ${isFlipped ? styles.flipped : ''}`}>
+                <div className={styles.cardInner}>
+                    {/* Front Side */}
+                    <div className={styles.cardFront}>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Song</Form.Label>
+                                <Form.Control
+                                    placeholder="Enter the name of the song..."
+                                    onChange={handleTrackChange}
+                                    value={selectedTrack}
+                                />
+                            </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formSelect">
-                    <Form.Label>Singer</Form.Label>
-                    <Form.Select value={selectedArtists} onChange={handleSingerChange}>
-                        <option value="" disabled hidden>Select and option...</option>
-                        <option value={tracks[0].artist}>{tracks[0].artist}</option>
-                        <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
-                        <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
-                        <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
-                        <option value={relatedArtists[3].name}>{relatedArtists[3].name}</option>
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                            <Form.Group className="mb-3" controlId="formSelect">
+                                <Form.Label>Singer</Form.Label>
+                                <Form.Select value={selectedArtists} onChange={handleSingerChange}>
+                                    <option value="" disabled hidden>Select an option...</option>
+                                    <option value={tracks[0].artist}>{tracks[0].artist}</option>
+                                    <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
+                                    <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
+                                    <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                                <Form.Check type="checkbox" label="Check me out" />
+                            </Form.Group>
+                            <Button variant="primary" type="submit">Submit</Button>
+                        </Form>
+                        <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
+                            Flip to Image
+                        </Button>
+                    </div>
+
+                    {/* Back Side */}
+                    <div className={styles.cardBack}>
+                        <img src={tracks[0].img} alt="Your description" />
+                        <h3>Some Text Here</h3>
+                        <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
+                            Flip to Form
+                        </Button>
+                    </div>
+                </div>
+            </div>
             <PlayButton onClick={() => { setUri(tracks[0].trackUri) }} />
             <Button className="primary" onClick={() => setIsVisible(!isVisible)}>Show</Button>
             <div className={isVisible ? styles.visible : styles.hidden}>
