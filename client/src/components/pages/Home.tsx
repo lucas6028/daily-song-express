@@ -19,7 +19,7 @@ const Home: React.FC = () => {
             <Slide direction="up" triggerOnce>
                 <Button
                     href="/dashboard"
-                    variant="success"
+                    variant="primary"
                     size="lg"
                     // className={styles.button}
                     onClick={() => navigate("/dashboard")}

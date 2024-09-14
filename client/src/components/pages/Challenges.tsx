@@ -22,6 +22,7 @@ function Challenges() {
     const [tracks, setTracks] = useState<Track[]>([]);
     const [selectedTrack, setSelectedTrack] = useState<string>("");
     const [selectedSinger, setSelectedSinger] = useState<string>("");
+    const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -90,6 +91,30 @@ function Challenges() {
     }, []);
 
     useEffect(() => {
+        const fetchRelatedArtists = async () => {
+            if (artists.length === 0) return;
+
+            console.log(artists[0].id);
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/artist/related`, {
+                    params: {
+                        id: artists[0].id,
+                    },
+                });
+                console.log(res);
+                const newRelatedArtists: Artist[] = res.data.body.artists.map((art: SpotifyArtistResponse) => ({
+                    name: art.name,
+                    id: art.id,
+                    popularity: art.popularity,
+                    uri: art.uri,
+                    imgUrl: art.images[1].url,
+                }));
+                setRelatedArtists(newRelatedArtists);
+            } catch (err) {
+                console.error("Error while get related artists: " + err);
+            }
+        };
+
         const fetchArtistTopTracks = async () => {
             if (artists.length === 0) return;
 
@@ -124,6 +149,7 @@ function Challenges() {
             }
         };
 
+        fetchRelatedArtists();
         fetchArtistTopTracks();
     }, [artists]);
 
@@ -145,7 +171,7 @@ function Challenges() {
         setSelectedSinger(value);
     }
 
-    if (!isAuthenticated || loading) {
+    if (!isAuthenticated || loading || relatedArtists.length === 0) {
         return (
             <Loading />
         )
@@ -174,8 +200,8 @@ function Challenges() {
                     <Form.Select value={selectedSinger} onChange={handleSingerChange}>
                         <option value="" disabled hidden>Select and option...</option>
                         <option value={tracks[0].artist}>{tracks[0].artist}</option>
-                        <option value="b">b</option>
-                        <option value="c">c</option>
+                        <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
+                        <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
                     </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
