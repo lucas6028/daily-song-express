@@ -8,6 +8,7 @@ import spotifyPlayerStyles from "../styles/style";
 import PlayButton from "../ui/button/PlayButton";
 import styles from "../styles/Challenge.module.css";
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from "../types";
+import NavBar from "../ui/navbar/Navbar";
 
 function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -156,7 +157,7 @@ function Challenges() {
 
     return (
         <>
-            <h1>Challenge</h1>
+            <NavBar />
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Track</Form.Label>
