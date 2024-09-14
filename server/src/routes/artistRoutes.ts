@@ -56,4 +56,18 @@ router.get("/topTracks", async (req, res) => {
   }
 });
 
+// Get Spotify catalog information about artists similar to a given artist.
+// Similarity is based on analysis of the Spotify community's listening history.
+router.get("/related", (req, res) => {
+  const { id = "6HvZYsbFfjnjFrWF950C9d" } = req.query as { id?: string };
+
+  try {
+    const data = spotifyAPI.getArtistRelatedArtists(id);
+    res.status(200).json(data);
+  } catch (err) {
+    console.log("Error while get artist related aritists: " + err);
+    res.status(400);
+  }
+});
+
 export default router;

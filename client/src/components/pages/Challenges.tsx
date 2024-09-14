@@ -16,11 +16,12 @@ function Challenges() {
     const [uri, setUri] = useState<string>("");
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [guessTrack, setGuessTrack] = useState("");
-    const [guessSinger, setGuessSinger] = useState("");
+    // const [guessSinger, setGuessSinger] = useState("");
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [artists, setArtists] = useState<Artist[]>([]);
     const [tracks, setTracks] = useState<Track[]>([]);
+    const [selectedSinger, setSelectedSinger] = useState<string>("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -129,7 +130,7 @@ function Challenges() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log(guessTrack);
-        console.log(guessSinger);
+        console.log(selectedSinger);
         console.log(tracks[0].title);
         console.log(tracks[1].artist);
     }
@@ -139,9 +140,9 @@ function Challenges() {
         setGuessTrack(value);
     }
 
-    const handleSingerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSingerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
-        setGuessSinger(value);
+        setSelectedSinger(value);
     }
 
     if (!isAuthenticated || loading) {
@@ -166,9 +167,14 @@ function Challenges() {
                     </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3" controlId="formSelect">
                     <Form.Label>Singer</Form.Label>
-                    <Form.Control placeholder="Enter Singer name" onChange={handleSingerChange} />
+                    <Form.Select value={selectedSinger} onChange={handleSingerChange}>
+                        <option value="" disabled hidden>Select and option...</option>
+                        <option value="a">a</option>
+                        <option value="b">b</option>
+                        <option value="c">c</option>
+                    </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out" />
