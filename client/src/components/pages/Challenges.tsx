@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 import axios from 'axios';
 import Loading from "../ui/loading/Loading";
 import SpotifyWebPlayer from "react-spotify-web-playback";
@@ -195,54 +195,59 @@ function Challenges() {
     return (
         <>
             <NavBar />
-            <div className={`bg-secondary ${styles.cardContainer} ${isFlipped ? styles.flipped : ''}`}>
-                <div className={styles.cardInner}>
+            <div className={`${styles.cardContainer} ${isFlipped ? styles.flipped : ''}`}>
+                <div className={`d-flex justify-content-center mt-4 ${styles.cardInner}`}>
                     {/* Front Side */}
-                    <div className={styles.cardFront}>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Song</Form.Label>
-                                <Form.Control
-                                    placeholder="Enter the name of the song..."
-                                    onChange={handleTrackChange}
-                                    value={selectedTrack}
-                                />
-                            </Form.Group>
+                    <div className={`d-flex justify-content-center mt-4 ${styles.Front}`}>
+                        <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
+                            <Card.Body>
+                                <Form onSubmit={handleSubmit}>
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label>Song</Form.Label>
+                                        <Form.Control
+                                            placeholder="Name of the song..."
+                                            onChange={handleTrackChange}
+                                            value={selectedTrack}
+                                        />
+                                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formSelect">
-                                <Form.Label>Singer</Form.Label>
-                                <Form.Select value={selectedArtists} onChange={handleSingerChange}>
-                                    <option value="" disabled hidden>Select an option...</option>
-                                    <option value={tracks[0].artist}>{tracks[0].artist}</option>
-                                    <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
-                                    <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
-                                    <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
-                                </Form.Select>
-                            </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formSelect">
+                                        <Form.Label>Singer</Form.Label>
+                                        <Form.Select value={selectedArtists} onChange={handleSingerChange}>
+                                            <option value="" disabled hidden>Select an option...</option>
+                                            <option value={tracks[0].artist}>{tracks[0].artist}</option>
+                                            <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
+                                            <option value={relatedArtists[1].name}>{relatedArtists[1].name}</option>
+                                            <option value={relatedArtists[2].name}>{relatedArtists[2].name}</option>
+                                        </Form.Select>
+                                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" label="Check me out" />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">Submit</Button>
-                        </Form>
-                        <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
-                            Flip to Image
-                        </Button>
+                                    <div className={styles.submitButtonContainer}>
+                                        <Button variant="primary" type="submit">Submit</Button>
+                                        <PlayButton onClick={() => { setUri(tracks[0].trackUri) }} />
+                                    </div>
+                                </Form>
+                            </Card.Body>
+                        </Card>
                     </div>
 
                     {/* Back Side */}
-                    <div className={styles.cardBack}>
-                        <img src={tracks[0].img} alt="Your description" />
-                        <h3>Some Text Here</h3>
-                        <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
-                            Flip to Form
-                        </Button>
+                    <div className={`d-flex justify-content-center mt-4 ${styles.cardBack}`}>
+                        <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
+                            <Card.Img src={tracks[0].img} alt="Your description" className={`rounded-circle mx-auto mt-3 profile-img ${styles.cardImg}`} />
+                            <Card.Body className="text-center">
+                                <Card.Title>{tracks[0].title}</Card.Title>
+                                <Card.Subtitle>{tracks[0].artist}</Card.Subtitle>
+                            </Card.Body>
+                        </Card>
                     </div>
                 </div>
             </div>
-            <PlayButton onClick={() => { setUri(tracks[0].trackUri) }} />
+            <Button variant="success" className="mt-3" onClick={() => setIsFlipped(!isFlipped)}>
+                Flip to Image
+            </Button>
             <Button className="primary" onClick={() => setIsVisible(!isVisible)}>Show</Button>
-            <div className={isVisible ? styles.visible : styles.hidden}>
+            <div className={`${isVisible ? styles.visible : styles.hidden} ${styles.playerContainer}`}>
                 {access_token ?
                     <SpotifyWebPlayer callback={(state) => {
                         if (!state.isPlaying) {
