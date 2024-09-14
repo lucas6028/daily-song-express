@@ -4,10 +4,18 @@ import spotifyAPI from "../config/spotifyConfig";
 const router = Router();
 
 // my top artists
-router.post("/myTop", async (req, res) => {
+router.get("/myTop", async (req, res) => {
   try {
     const access_token = req.cookies["access_token"];
-    const { time_range = "medium_term", limit = 10, offset = 5 } = req.body;
+    const {
+      time_range = "medium_term",
+      limit = 10,
+      offset = 5,
+    } = req.query as {
+      time_range?: "medium_term" | "long_term" | "short_term" | undefined;
+      limit?: number | undefined;
+      offset?: number | undefined;
+    };
 
     if (!access_token) {
       return res.status(401).json({ error: "Access token is missing" });
@@ -27,10 +35,13 @@ router.post("/myTop", async (req, res) => {
 });
 
 // artist's top tracks
-router.post("/topTracks", async (req, res) => {
+router.get("/topTracks", async (req, res) => {
   try {
     const access_token = req.cookies["access_token"];
-    const { id = "6HvZYsbFfjnjFrWF950C9d", market = "ES" } = req.body;
+    const { id = "6HvZYsbFfjnjFrWF950C9d", market = "ES" } = req.query as {
+      id?: string;
+      market?: string;
+    };
 
     if (!access_token) {
       return res.status(401).json({ error: "Access token is missing" });

@@ -62,10 +62,11 @@ function TopTrack() {
         }
         const fetchTopTracks = async () => {
             try {
-                const res = await axios.post<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`, {
-                    limit: 10,
-                }, {
-                    withCredentials: true
+                const res = await axios.get<SpotifyItemsResponse>(`${import.meta.env.VITE_SERVER_URL}/track/myTop`, {
+                    params: {
+                        limit: 10,
+                    },
+                    withCredentials: true,
                 });
                 const newTracks = res.data.body.items.map((track) => ({
                     albumName: track.album.name,

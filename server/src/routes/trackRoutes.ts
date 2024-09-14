@@ -5,8 +5,8 @@ const router = Router();
 
 router.get("/", (req, res) => {});
 
-router.post("/myTop", (req, res) => {
-  const { limit } = req.body;
+router.get("/myTop", (req, res) => {
+  const { limit = 10 } = req.query as { limit?: number };
   const access_token = req.cookies["access_token"];
 
   if (!access_token) {
@@ -25,9 +25,15 @@ router.post("/myTop", (req, res) => {
     });
 });
 
-router.post("/recommend", (req, res) => {
+router.get("/recommend", (req, res) => {
   const { seed_artists, seed_genres, seed_tracks, min_popularity, limit } =
-    req.body;
+    req.query as {
+      seed_artists?: string | readonly string[] | undefined;
+      seed_genres?: string | readonly string[] | undefined;
+      seed_tracks?: string | readonly string[] | undefined;
+      min_popularity?: number | undefined;
+      limit?: number | undefined;
+    };
   const access_token = req.cookies["access_token"];
 
   if (!access_token) {

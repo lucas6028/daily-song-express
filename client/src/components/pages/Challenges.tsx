@@ -62,10 +62,13 @@ function Challenges() {
 
         const fetchTopArtists = async () => {
             try {
-                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
-                    limit: 1,
-                    offset: Math.floor(Math.random() * 51),
-                }, { withCredentials: true });
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
+                    params: {
+                        limit: 1,
+                        offset: Math.floor(Math.random() * 51)
+                    },
+                    withCredentials: true
+                });
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
                     id: art.id,
@@ -90,13 +93,15 @@ function Challenges() {
             if (artists.length === 0) return;
 
             try {
-                const res = await axios.post<SpotifyTracksResponse>(
+                const res = await axios.get<SpotifyTracksResponse>(
                     `${import.meta.env.VITE_SERVER_URL}/artist/topTracks`,
                     {
-                        id: artists[0].id,
-                        market: "TW",
-                    },
-                    { withCredentials: true }
+                        params: {
+                            id: artists[0].id,
+                            market: "TW",
+                        },
+                        withCredentials: true
+                    }
                 );
                 const newTracks: Track[] = res.data.body.tracks.map((track) => ({
                     albumName: track.album.name,

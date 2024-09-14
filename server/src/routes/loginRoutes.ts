@@ -5,7 +5,9 @@ import RefreshToken from "../auth/RefreshToken";
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const code = req.query.code as string;
+  const { code = "" } = req.query as {
+    code?: string;
+  };
 
   if (!code) {
     console.error("Authorization code is missing from request");

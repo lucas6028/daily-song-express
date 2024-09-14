@@ -60,10 +60,13 @@ function DailySong() {
         }
         const fetchTopArtists = async () => {
             try {
-                const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
-                    limit: 1,
-                    offset: Math.floor(Math.random() * 21),
-                }, { withCredentials: true });
+                const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/artist/myTop`, {
+                    params: {
+                        limit: 1,
+                        offset: Math.floor(Math.random() * 21),
+                    },
+                    withCredentials: true
+                });
 
                 const newArtists: Artist[] = res.data.body.items.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
@@ -89,15 +92,17 @@ function DailySong() {
             if (artists.length === 0) return;
 
             try {
-                const res = await axios.post<SpotifyTracksResponse>(
+                const res = await axios.get<SpotifyTracksResponse>(
                     `${import.meta.env.VITE_SERVER_URL}/track/recommend`,
                     {
-                        limit: 10,
-                        seed_artists: artists[0].id,
-                        // seed_genres: seedGenres,
-                        min_popularity: minPopularity,
-                    },
-                    { withCredentials: true }
+                        params: {
+                            limit: 10,
+                            seed_artists: artists[0].id,
+                            // seed_genres: seedGenres,
+                            min_popularity: minPopularity,
+
+                        }, withCredentials: true
+                    }
                 );
                 const newTracks: Track[] = res.data.body.tracks.map((track) => ({
                     albumName: track.album.name,
