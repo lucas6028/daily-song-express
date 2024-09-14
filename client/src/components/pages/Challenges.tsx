@@ -9,6 +9,7 @@ import PlayButton from "../ui/button/PlayButton";
 import styles from "../styles/Challenge.module.css";
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from "../types";
 import NavBar from "../ui/navbar/Navbar";
+import { compareNames, trimName } from "../../utils/name";
 
 function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -20,7 +21,7 @@ function Challenges() {
     const [artists, setArtists] = useState<Artist[]>([]);
     const [tracks, setTracks] = useState<Track[]>([]);
     const [selectedTrack, setSelectedTrack] = useState<string>("");
-    const [selectedSinger, setSelectedSinger] = useState<string>("");
+    const [selectedArtists, setSelectedArtists] = useState<string>("");
     const [relatedArtists, setRelatedArtists] = useState<Artist[]>([]);
     const navigate = useNavigate();
 
@@ -149,20 +150,35 @@ function Challenges() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        const trimTrackName = trimName(tracks[0].title);
+        const trimSelectedTrackName = trimName(selectedTrack);
+        if (compareNames(trimTrackName, trimSelectedTrackName)) {
+            console.log("The track name is correct!");
+        }
+        else {
+            console.log("The track name is wrong...");
+        }
+
+        if (tracks[0].artist === selectedArtists) {
+            console.log("The artist name is correct!");
+        }
+        else {
+            console.log("The artist name is wrong...");
+        }
         console.log(selectedTrack);
-        console.log(selectedSinger);
+        console.log(selectedArtists);
         console.log(tracks[0].title);
         console.log(tracks[0].artist);
     }
 
-    const handleTrackChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleTrackChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         setSelectedTrack(value);
     }
 
     const handleSingerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const { value } = event.target;
-        setSelectedSinger(value);
+        setSelectedArtists(value);
     }
 
     if (!isAuthenticated || artists.length === 0 || relatedArtists.length === 0 || tracks.length === 0) {
@@ -180,18 +196,18 @@ function Challenges() {
             <NavBar />
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Track</Form.Label>
-                    <Form.Select value={selectedTrack} onChange={handleTrackChange}>
-                        <option value="" disabled hidden>Select and option...</option>
-                        <option value={tracks[0].title}>{tracks[0].title}</option>
-                        <option value="b">b</option>
-                        <option value="c">c</option>
-                    </Form.Select>
+                    <Form.Label>Song</Form.Label>
+                    <Form.Control
+                        placeholder="Enter the name of the song..."
+                        onChange={handleTrackChange}
+                        value={selectedTrack}
+                    >
+                    </Form.Control>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formSelect">
                     <Form.Label>Singer</Form.Label>
-                    <Form.Select value={selectedSinger} onChange={handleSingerChange}>
+                    <Form.Select value={selectedArtists} onChange={handleSingerChange}>
                         <option value="" disabled hidden>Select and option...</option>
                         <option value={tracks[0].artist}>{tracks[0].artist}</option>
                         <option value={relatedArtists[0].name}>{relatedArtists[0].name}</option>
