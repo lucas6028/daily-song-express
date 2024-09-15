@@ -1,5 +1,7 @@
-import express from "express";
 import cors from "cors";
+import lusca from "lusca";
+import express from "express";
+import session from "express-session";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/loginRoutes";
 import refreshRoutes from "./routes/refreshRoutes";
@@ -21,6 +23,19 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.API_SESSION_SECRET as string,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: process.env.NODE_ENV === "production" },
+  })
+);
+app.use(
+  lusca.csrf({
+    cookie: "_csrf",
+  })
+);
 
 app.use("/", rootRoutes);
 app.use("/login", authRoutes);
