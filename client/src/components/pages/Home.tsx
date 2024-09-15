@@ -2,7 +2,7 @@ import { Fade, Zoom, Slide } from 'react-awesome-reveal';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
-import brand from "/brand_text.png";
+import brand from "/large_icon.png";
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
