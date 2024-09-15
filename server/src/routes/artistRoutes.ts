@@ -59,7 +59,12 @@ router.get("/topTracks", async (req, res) => {
 // Get Spotify catalog information about artists similar to a given artist.
 // Similarity is based on analysis of the Spotify community's listening history.
 router.get("/related", async (req, res) => {
+  const access_token = req.cookies["access_token"];
   const { id = "6HvZYsbFfjnjFrWF950C9d" } = req.query as { id?: string };
+
+  if (!access_token) {
+    return res.status(401).json({ error: "Access token is missing" });
+  }
 
   try {
     const data = await spotifyAPI.getArtistRelatedArtists(id);
