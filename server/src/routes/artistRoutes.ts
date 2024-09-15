@@ -65,6 +65,7 @@ router.get("/related", async (req, res) => {
   if (!access_token) {
     return res.status(401).json({ error: "Access token is missing" });
   }
+  spotifyAPI.setAccessToken(access_token);
 
   try {
     const data = await spotifyAPI.getArtistRelatedArtists(id);
