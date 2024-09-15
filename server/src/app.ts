@@ -3,6 +3,7 @@ import lusca from "lusca";
 import express from "express";
 import session from "express-session";
 import cookieParser from "cookie-parser";
+import rateLimit from "express-rate-limit";
 import authRoutes from "./routes/loginRoutes";
 import refreshRoutes from "./routes/refreshRoutes";
 import profileRoutes from "./routes/profileRoutes";
@@ -14,6 +15,12 @@ import rootRoutes from "./routes/rootRoutes";
 import checkRoutes from "./routes/checkRoutes";
 
 const app = express();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100, // Limit each IP to 100 requests per window
+  message: "Too many requests from this IP, please try again after 15 minutes.",
+  headers: true, // Include rate limit headers in the response
+});
 
 app.use(express.json()); // Middleware to parse JSON
 app.use(
@@ -36,6 +43,7 @@ app.use(
     cookie: "_csrf",
   })
 );
+app.use(limiter);
 
 app.use("/", rootRoutes);
 app.use("/login", authRoutes);
