@@ -2,6 +2,8 @@ import { Image, Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { handleLogout } from '../../api/Logout';
 import axios from 'axios';
+import logo from "/small_icon.png";
+// import logo from "/medium_icon.png";
 
 function NavBar() {
     const [profileImg, setProfileImg] = useState<string>("https://placehold.jp/150x150.png");
@@ -23,7 +25,15 @@ function NavBar() {
     return (
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
             <Container>
-                <Navbar.Brand href="/">Daily Song</Navbar.Brand>
+                <Navbar.Brand href="/">
+                    <img
+                        src={logo}
+                        width="40"
+                        height="40"
+                        className="d-inline-block align-top"
+                        alt="Daily Song Logo"
+                    />
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
