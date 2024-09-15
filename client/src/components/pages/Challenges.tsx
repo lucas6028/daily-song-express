@@ -99,6 +99,7 @@ function Challenges() {
                     params: {
                         id: artists[0].id,
                     },
+                    withCredentials: true,
                 });
                 const newRelatedArtists: Artist[] = res.data.body.artists.map((art: SpotifyArtistResponse) => ({
                     name: art.name,
