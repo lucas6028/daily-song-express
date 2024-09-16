@@ -2,6 +2,7 @@ import { Zoom, Slide } from 'react-awesome-reveal';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
 import brand from "/large_icon.png";
+import HomeButton from '../ui/button/HomeButton';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -15,12 +16,7 @@ const Home: React.FC = () => {
                 />
             </Zoom>
             <Slide direction="up" triggerOnce>
-                <button
-                    className={styles.button}
-                    onClick={() => navigate("/dashboard")}
-                >
-                    Dashboard
-                </button>
+                <HomeButton onClick={() => navigate("/dashboard")} />
             </Slide>
 
             <Zoom triggerOnce>
