@@ -1,5 +1,4 @@
-import { Fade, Zoom, Slide } from 'react-awesome-reveal';
-import { Button } from 'react-bootstrap';
+import { Zoom, Slide } from 'react-awesome-reveal';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
 import brand from "/large_icon.png";
@@ -10,28 +9,19 @@ const Home: React.FC = () => {
         <div className={styles.container}>
             <Zoom triggerOnce>
                 <img
-                    // src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Spotify_icon.svg/768px-Spotify_icon.svg.png?202208211253235"
                     src={brand}
-                    alt="Spotify experience"
+                    alt="Daily Song"
                     className={styles.image}
                 />
             </Zoom>
             <Slide direction="up" triggerOnce>
-                <Button
-                    href="/dashboard"
-                    variant="primary"
-                    size="lg"
-                    // className={styles.button}
+                <button
+                    className={styles.button}
                     onClick={() => navigate("/dashboard")}
                 >
-                    Go to Dashboard
-                </Button>
+                    Dashboard
+                </button>
             </Slide>
-            <Fade triggerOnce>
-                <h1 className={styles.heading}>Welcome to Your Spotify Experience</h1>
-            </Fade>
-
-            {/* Adding an inline image */}
 
             <Zoom triggerOnce>
                 <p className={styles.text}>
