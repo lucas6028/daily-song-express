@@ -1,7 +1,7 @@
 import { Zoom, Slide } from 'react-awesome-reveal';
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Home.module.css";
-import brand from "/large_icon.png";
+import brand from "/medium_icon.png";
 import HomeButton from '../ui/button/HomeButton';
 import Footer from '../ui/footer/Footer';
 
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
 
             <Zoom triggerOnce>
                 <p className={styles.text}>
-                    Discover your favorite tracks, explore new recommendations, and more!
+                    Display top tracks, recommend tracks, and daily challenge
                 </p>
             </Zoom>
             <Footer />

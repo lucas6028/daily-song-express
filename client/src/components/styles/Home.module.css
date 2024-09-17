@@ -44,15 +44,15 @@
 .text {
   font-size: 1.5rem;
   margin-top: 20px;
-  color: #fff;
+  color: #ffd700;
   font-weight: 300; /* Lighter text weight */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Subtle shadow for readability */
 }
 
 /* Floating Image */
 .image {
-  width: 399px;
-  height: 169px;
+  width: 237px;
+  height: 203px;
   margin-top: 60px;
   margin-bottom: 10px;
   animation: float 3s ease-in-out infinite;
