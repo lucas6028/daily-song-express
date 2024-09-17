@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { ButtonGroup, Container, Row, Col } from "react-bootstrap";
-import NavigationButton from "../ui/button/NavigationButton";
+import { Row, Col, Card } from "react-bootstrap";
 import Hamster from "../ui/hamster/Hamster";
 import NavBar from "../ui/navbar/Navbar";
 import axios from "axios";
-import "../styles/Dashboard.css";
+// import "../styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../ui/footer/Footer";
 
@@ -47,24 +46,45 @@ export default function Dashboard() {
     return (
         <>
             <NavBar />
-            <Container className="dashboard-container d-flex justify-content-center align-items-center">
-                <Row className="text-center">
-                    <Col>
-                        <h1 className="dashboard-title">Dashboard</h1>
-                        <ButtonGroup vertical className="dashboard-buttons">
-                            <NavigationButton to="/topTracks" className="btn btn-primary custom-btn">
-                                Top Tracks
-                            </NavigationButton>
-                            <NavigationButton to="/daily" className="btn btn-primary custom-btn">
-                                Daily Song
-                            </NavigationButton>
-                            <NavigationButton to="/challenges" className="btn btn-primary custom-btn">
-                                Challenges
-                            </NavigationButton>
-                        </ButtonGroup>
+            <div className="container mt-4">
+                <Row>
+                    <Col md={4} className="mb-3">
+                        <Card>
+                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                            <Card.Body>
+                                <Card.Title>Card Title 1</Card.Title>
+                                <Card.Text>
+                                    This is a card example with some sample text for card 1.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
+                    <Col md={4} className="mb-3">
+                        <Card>
+                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                            <Card.Body>
+                                <Card.Title>Card Title 2</Card.Title>
+                                <Card.Text>
+                                    This is a card example with some sample text for card 2.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
+                    <Col md={4} className="mb-3">
+                        <Card>
+                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                            <Card.Body>
+                                <Card.Title>Card Title 3</Card.Title>
+                                <Card.Text>
+                                    This is a card example with some sample text for card 3.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
                     </Col>
                 </Row>
-            </Container>
+            </div>
             <Footer />
         </>
     );
