@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Row, Col, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Hamster from "../ui/hamster/Hamster";
 import NavBar from "../ui/navbar/Navbar";
-import axios from "axios";
-// import "../styles/Dashboard.css";
-import { useNavigate } from "react-router-dom";
 import Footer from "../ui/footer/Footer";
+import styles from "../styles/Dashboard.module.css";
+// import music from "/music.svg";
+import heart from "/heart.svg";
+// import goals from "/goals.png"
 
 export default function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,40 +49,43 @@ export default function Dashboard() {
     return (
         <>
             <NavBar />
-            <div className="container mt-4">
-                <Row>
-                    <Col md={4} className="mb-3">
-                        <Card>
-                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+            <div className={`container mt-4 ${styles.containerHeight}`}>
+                <Row className="d-flex justify-content-center align-items-center h-100">
+                    <Col md={3} className="mb-5 d-flex justify-content-center">
+                        <Card className={styles.card} onClick={() => navigate("/topTracks")}>
+                            <div className={styles.iconContainer}>
+                                <img src={heart} className={styles.icon} />
+                            </div>
                             <Card.Body>
-                                <Card.Title>Card Title 1</Card.Title>
-                                <Card.Text>
-                                    This is a card example with some sample text for card 1.
-                                </Card.Text>
+                                <Card.Title>Top Tracks</Card.Title>
+                                <Card.Text>Display your favorite tracks recently</Card.Text>
+                                <Card.Text>All the songs you loved</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
 
-                    <Col md={4} className="mb-3">
-                        <Card>
-                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                    <Col md={3} className="mb-5 d-flex justify-content-center">
+                        <Card className={styles.card} onClick={() => navigate("/daily")}>
+                            <div className={styles.iconContainer}>
+                                <img src={heart} className={styles.icon} />
+                            </div>
                             <Card.Body>
-                                <Card.Title>Card Title 2</Card.Title>
-                                <Card.Text>
-                                    This is a card example with some sample text for card 2.
-                                </Card.Text>
+                                <Card.Title>Recommend Tracks</Card.Title>
+                                <Card.Text>Display recommend tracks for you</Card.Text>
+                                <Card.Text>Base on your favorite</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
 
-                    <Col md={4} className="mb-3">
-                        <Card>
-                            <Card.Img variant="top" src="https://via.placeholder.com/150" />
+                    <Col md={3} className="mb-5 d-flex justify-content-center">
+                        <Card className={styles.card} onClick={() => navigate("/challenge")}>
+                            <div className={styles.iconContainer}>
+                                <img src={heart} className={styles.icon} />
+                            </div>
                             <Card.Body>
-                                <Card.Title>Card Title 3</Card.Title>
-                                <Card.Text>
-                                    This is a card example with some sample text for card 3.
-                                </Card.Text>
+                                <Card.Title>Challenge</Card.Title>
+                                <Card.Text>Guess the song name and singer</Card.Text>
+                                <Card.Text>Explore more songs</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
