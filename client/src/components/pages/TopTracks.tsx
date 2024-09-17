@@ -9,6 +9,7 @@ import PlayButton from "../ui/button/PlayButton";
 import NavBar from "../ui/navbar/Navbar";
 import styles from "../styles/TopTracks.module.css";
 import spotifyPlayerStyles from "../styles/style";
+import Footer from '../ui/footer/Footer';
 
 function TopTrack() {
     const [tracks, setTracks] = useState<Track[]>([]);
@@ -139,6 +140,7 @@ function TopTrack() {
                     <p>No token</p>
                 }
             </div>
+            <Footer />
         </>
     );
 }

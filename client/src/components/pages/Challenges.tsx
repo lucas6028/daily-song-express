@@ -10,6 +10,7 @@ import styles from "../styles/Challenge.module.css";
 import { Artist, SpotifyArtistResponse, SpotifyTracksResponse, Track } from "../types";
 import NavBar from "../ui/navbar/Navbar";
 import { compareNames, trimName } from "../../utils/name";
+import Footer from "../ui/footer/Footer";
 
 function Challenges() {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -265,6 +266,7 @@ function Challenges() {
                     <p>No token</p>
                 }
             </ div>
+            <Footer />
         </>
     )
 }

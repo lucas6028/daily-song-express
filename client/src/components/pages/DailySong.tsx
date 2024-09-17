@@ -9,6 +9,7 @@ import NavBar from '../ui/navbar/Navbar';
 import axios from 'axios';
 import styles from "../styles/DailySong.module.css";
 import spotifyPlayerStyles from '../styles/style';
+import Footer from '../ui/footer/Footer';
 
 function DailySong() {
     const [tracks, setTracks] = useState<Track[]>([]);
@@ -173,6 +174,7 @@ function DailySong() {
                     <p>No token!</p>
                 }
             </div>
+            <Footer />
         </>
     );
 }

@@ -3,9 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import NavBar from "../ui/navbar/Navbar";
-import "../styles/Profile.css"
+import styles from "../styles/Profile.module.css"
 import { useNavigate } from "react-router-dom";
 import Loading from "../ui/loading/Loading";
+import Footer from "../ui/footer/Footer";
 
 export default function Profile() {
     const defaultProfile = useMemo(() => ({
@@ -73,9 +74,9 @@ export default function Profile() {
     return (
         <>
             <NavBar />
-            <div className="profile-container d-flex justify-content-center mt-4">
-                <Card className="shadow-lg bg-secondary bg-gradient text-light rounded-3 profile-card" style={{ width: '20rem' }}>
-                    <Card.Img className="rounded-circle mx-auto mt-3 profile-img" variant="top" src={profile.imgUrl} alt="Profile Picture" />
+            <div className={`${styles.container} d-flex justify-content-center mt-4`}>
+                <Card className={`shadow-lg bg-secondary bg-gradient text-light rounded-3 ${styles.card}`} style={{ width: '20rem' }}>
+                    <Card.Img className={`rounded-circle mx-auto mt-3 ${styles.img}`} variant="top" src={profile.imgUrl} alt="Profile Picture" />
                     <Card.Body className="text-center">
                         <Card.Title className="mb-2">{profile.name}</Card.Title>
                         <Card.Text className="mb-3">
@@ -84,12 +85,13 @@ export default function Profile() {
                                 <li><strong>Followers:</strong> {profile.followers}</li>
                             </ul>
                         </Card.Text>
-                        <Button className="spotify-btn" variant="success" href={profile.spotifyUrl} target="_blank" rel="noopener noreferrer">
+                        <Button className={styles.spotifyBtn} variant="success" href={profile.spotifyUrl} target="_blank" rel="noopener noreferrer">
                             View on Spotify
                         </Button>
                     </Card.Body >
                 </Card >
             </div>
+            <Footer />
         </>
     );
 }

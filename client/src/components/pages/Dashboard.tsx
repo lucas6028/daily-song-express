@@ -6,6 +6,7 @@ import NavBar from "../ui/navbar/Navbar";
 import axios from "axios";
 import "../styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "../ui/footer/Footer";
 
 export default function Dashboard() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -63,6 +64,7 @@ export default function Dashboard() {
                     </Col>
                 </Row>
             </Container>
+            <Footer />
         </>
     );
 }
