@@ -1,25 +1,21 @@
-import "./HomeButton.css";
+import styles from "./HomeButton.module.css";
 
 interface HomeButtonProps {
     onClick: () => void;
 }
 
-
 export default function HomeButton({ onClick }: HomeButtonProps) {
     return (
-        /* From Uiverse.io by StealthWorm */
-        <button type="button" className="homeBtn" onClick={onClick}>
-            <strong>DASHBOARD</strong>
-            <div id="container-stars">
-                <div id="stars"></div>
+        <button type="button" className={styles.homeBtn} onClick={onClick}>
+            <strong className={styles.homeBtnText}>DASHBOARD</strong>
+            <div className={styles.containerStars}>
+                <div className={styles.stars}></div>
             </div>
 
-            <div id="glow">
-                <div className="homeCircle"></div>
-                <div className="homeCircle"></div>
+            <div className={styles.glow}>
+                <div className={styles.homeCircle}></div>
+                <div className={styles.homeCircle}></div>
             </div>
         </button>
-
-
-    )
+    );
 }

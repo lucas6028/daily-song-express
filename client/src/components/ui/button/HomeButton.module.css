@@ -25,7 +25,7 @@
   background-clip: content-box, border-box;
 }
 
-#container-stars {
+.containerStars {
   position: absolute;
   z-index: -1;
   width: 100%;
@@ -36,7 +36,7 @@
   border-radius: 5rem;
 }
 
-strong {
+.homeBtnText {
   z-index: 2;
   font-family: "Avalors Personal Use";
   font-size: 12px;
@@ -45,7 +45,7 @@ strong {
   text-shadow: 0 0 4px white;
 }
 
-#glow {
+.glow {
   position: absolute;
   display: flex;
   width: 12rem;
@@ -59,42 +59,42 @@ strong {
   z-index: -1;
 }
 
-.circle:nth-of-type(1) {
+.homeCircle:nth-of-type(1) {
   background: rgba(254, 83, 186, 0.636);
 }
 
-.circle:nth-of-type(2) {
+.homeCircle:nth-of-type(2) {
   background: rgba(142, 81, 234, 0.704);
 }
 
-.btn:hover #container-stars {
+.homeBtn:hover .containerStars {
   z-index: 1;
   background-color: #212121;
 }
 
-.btn:hover {
+.homeBtn:hover {
   transform: scale(1.1);
 }
 
-.btn:active {
+.homeBtn:active {
   border: double 4px #fe53bb;
   background-origin: border-box;
   background-clip: content-box, border-box;
   animation: none;
 }
 
-.btn:active .circle {
+.homeBtn:active .homeCircle {
   background: #fe53bb;
 }
 
-#stars {
+.stars {
   position: relative;
   background: transparent;
   width: 200rem;
   height: 200rem;
 }
 
-#stars::after {
+.stars::after {
   content: "";
   position: absolute;
   top: -10rem;
@@ -104,12 +104,12 @@ strong {
   animation: animStarRotate 90s linear infinite;
 }
 
-#stars::after {
+.stars::after {
   background-image: radial-gradient(#ffffff 1px, transparent 1%);
   background-size: 50px 50px;
 }
 
-#stars::before {
+.stars::before {
   content: "";
   position: absolute;
   top: 0;
@@ -119,7 +119,7 @@ strong {
   animation: animStar 60s linear infinite;
 }
 
-#stars::before {
+.stars::before {
   background-image: radial-gradient(#ffffff 1px, transparent 1%);
   background-size: 50px 50px;
   opacity: 0.5;
